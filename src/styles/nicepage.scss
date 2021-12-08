@@ -14777,9 +14777,7 @@ div.u-video,
 .u-post-tags {
   display: table;
 }
-.u-menu {
-  opacity: 0;
-}
+
 .u-responsive-xl .u-menu,
 .u-responsive-lg .u-menu,
 .u-responsive-md .u-menu,
@@ -34809,7 +34807,8 @@ a.u-link.u-text-hover-grey-90:hover {
  }
  
  .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("./images/thgumb-1920-201750.jp");
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+  /*url("../../public/images/thumb-1920-201750.jpg");*/
   background-position: 50% 50%;
 }
 

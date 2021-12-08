@@ -1,7 +1,7 @@
   
-const Identification = () => {
+const Authentication = () => {
   return (
-  <section classNameName="u-align-center u-clearfix u-image u-shading u-valign-bottom-xs u-section-1" src=""
+  <section className="u-align-center u-clearfix u-image u-shading u-valign-bottom-xs u-section-1" src=""
     data-image-width="1440" data-image-height="900" id="sec-f665">
     <div className="u-clearfix u-sheet u-sheet-1">
       <form id="formulaire" className="u-text u-text-default u-title u-text-1" method="post">
@@ -11,11 +11,10 @@ const Identification = () => {
           <label>Mot de passe</label>
           <input className="name" type="password" placeholder="Votre mot de passe"/><br/>
           <input type="submit" value="Envoyer" />
-          <div className="submitForm"><a href="">Identifiant ou mot de passe oublié?</a></div>
+          <div className="submitForm">Identifiant ou mot de passe oublié?</div>
         </div>
-
       </form>
     </div>
   </section>
   )};
-  export default Identification;
+  export default Authentication;
