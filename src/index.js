@@ -5,14 +5,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NavLink,
+  
 } from "react-router-dom";
 
 //import Menus from './Models/Menus';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
-import Authentication from './Page/Authentication/Authentication';
-
 import './styles/main.scss';
 import './fonts.js';
 import Menus from './Models/Menus';

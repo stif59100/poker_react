@@ -11,7 +11,6 @@ const BackButton = routeProps => (routeProps.location.pathname !== "/")
   : null;
 
 const Routes = () => {
-  console.log(Menus.Menus);
   return Menus.Menus.map(
     (route, index) => (
       <li className="u-nav-item">

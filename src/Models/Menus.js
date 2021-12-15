@@ -1,6 +1,7 @@
 import Home from '../Page/Home/Home';
 import Authentication from '../Page/Authentication/Authentication';
 import Championship from '../Page/Championship/Championship';
+import Round from '../Page/Round/round';
 class Menus {
   _menus = [
     {
@@ -9,6 +10,13 @@ class Menus {
       component: Home,
       name: 'Home',
       icon:["fas", "home"]
+    },
+    {
+      path: '/Round',
+      exact: true,
+      component: Round,
+      name: 'Round',
+      icon: ["fas", "trophy"]
     },
     {
       path: '/ChampionShip',
@@ -35,7 +43,6 @@ class Menus {
     console.log("constructor");
   }
   get Menus() {
-    console.log(this._menus)
     return this._menus;
   }
 }
