@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import { sha256 } from 'react-native-sha256';
 
 import {
   BrowserRouter as Router,

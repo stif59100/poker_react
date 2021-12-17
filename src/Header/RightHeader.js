@@ -9,7 +9,7 @@ const RightHeader = () =>{
     <button className="u-search-button" type="submit">
       <FontAwesomeIcon icon="search" size="1x"/>
     </button>
-    <input className="u-search-input" type="search" name="search" value="" placeholder="Search"/>
+    <input className="u-search-input" type="search" name="search" value="" placeholder="Recherche"/>
   </form>
   )};
   export default RightHeader;

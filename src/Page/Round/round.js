@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useEffect,useRef } from "react";
+import { useEffect, useRef } from "react";
 import PlayerRound from '../../Models/PlayerRound';
 import { observer } from 'mobx-react-lite';
 
@@ -10,25 +10,22 @@ const Round = () => {
 
 
     const OptionPlayer = observer(() =>
-   
+
         //PlayerRound.fetchManche(9)
-         //return <label>test</label>
-      PlayerRound.manches.map((manche, index) => {
-                console.log(index)
-                console.log(manche)
-                return 
-                <option key={index} value={manche.id_manche}>{manche.id_joueur}</option>
-                //<OptionPlayer key={index} {...manches}></OptionPlayer>
-            })
-   
+        //return <label>test</label>
+        PlayerRound.manches.map((manche, index) => {
+            return (<option key={index} defaultValue={manche.id_manche}>{manche.id_joueur}</option>)
+            //<OptionPlayer key={index} {...manche}></OptionPlayer>
+        })
+
     );
-    useEffect(()=>{
-         //PlayerRound.fetchManche(9);
-    //console.log(PlayerRound.manches())
+    useEffect(() => {
+        //PlayerRound.fetchManche(9);
+        //console.log(PlayerRound.manches())
     })
     const submit = (event) => {
         event.preventDefault();
-        const message = 'my player is{player} and date is ${date}'
+        const message = 'Vous avez ajouté des points'
         alert(message)
     };
 
@@ -36,13 +33,13 @@ const Round = () => {
         setDate(event.target.value)
     }
 
-   const selectPlayer = (event)=>{
-       setPlayer(event.target.value)
-   }
+    const selectPlayer = (event) => {
+        setPlayer(event.target.value)
+    }
 
-   const addPoint = (event)=>{
+    const addPoint = (event) => {
         setPoint(event.target.value)
-   }
+    }
     return (
         <section className="u-align-center u-clearfix u-image u-shading u-valign-bottom-xs u-section-1" src=""
             data-image-width="1440" data-image-height="900" id="sec-f665">
@@ -53,6 +50,12 @@ const Round = () => {
                     <form type="post" onSubmit={submit}>
                         <table>
                             <tbody>
+                                <tr>
+                                    
+                                    <th colSpan='3'>Manche<td><select><option>Sélection de manche</option></select></td></th> 
+                                    
+                                    
+                                </tr>
                                 <tr>
                                     <th>Date</th>
                                     <th>Joueur</th>
@@ -73,7 +76,7 @@ const Round = () => {
                                             </option>
                                         </select> */}
                                         <select onChange={selectPlayer}>
-                                        <OptionPlayer></OptionPlayer>
+                                            <OptionPlayer></OptionPlayer>
                                         </select>
                                     </td>
                                     <td><input type="int" placeholder="Saissez votre nombre de points" onChange={addPoint}></input></td>

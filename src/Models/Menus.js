@@ -2,6 +2,8 @@ import Home from '../Page/Home/Home';
 import Authentication from '../Page/Authentication/Authentication';
 import Championship from '../Page/Championship/Championship';
 import Round from '../Page/Round/round';
+import Inscription from '../Page/Inscription/Inscription_class';
+//import Inscription from '../Page/Inscription/Inscription';
 class Menus {
   _menus = [
     {
@@ -12,12 +14,13 @@ class Menus {
       icon:["fas", "home"]
     },
     {
-      path: '/Round',
+      path: '/Inscription',
       exact: true,
-      component: Round,
-      name: 'Round',
+      component: Inscription,
+      name: 'Inscription',
       icon: ["fas", "trophy"]
     },
+    
     {
       path: '/ChampionShip',
       exact: true,
@@ -29,8 +32,15 @@ class Menus {
       path: '/Authentication',
       exact: true,
       component: Authentication,
-      name: 'Authentication',
+      name: 'Authentification',
       icon: ["fas", "sign-in-alt"]
+    },
+    {
+      path: '/Round',
+      exact: true,
+      component: Round,
+      name: 'Round',
+      icon: ["fas", "trophy"]
     },
     {
       path: '/About',
