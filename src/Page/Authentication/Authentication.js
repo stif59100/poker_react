@@ -38,9 +38,9 @@ const Authentication = () => {
 
   }
   return (
-    <section className="row">
+    <section className="row authentication">
       <div className="col-12 col-lg-4 offset-lg-4">
-        <form id="formulaire" onSubmit={onSubmit}>
+        <form  onSubmit={onSubmit}>
           <ErrorsForm {...errorsForm} ></ErrorsForm>
           <div className="form-group">
             <label htmlFor="inputEmail" className="w-100 text-left">Identifiant</label>

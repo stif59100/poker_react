@@ -3,11 +3,8 @@
 
 const Championship = () => {
   return (
-    <section class="u-align-center u-clearfix u-image u-shading u-valign-bottom-xs u-section-1" src=""
-      data-image-width="1440" data-image-height="900" id="sec-f665">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-text u-text-default u-title u-text-1"></div>
-        <div class="u-text u-text-default u-text-2">
+    <section class="row">
+      <div class="col-12">
           <table>
             <tbody>
               
@@ -51,7 +48,6 @@ const Championship = () => {
             </tbody>
           </table>
         </div>
-      </div>
     </section>)
 };
 export default Championship;

@@ -63,8 +63,7 @@ class Inscription extends React.Component{
   };
   render(){
     return (
-      <section className="u-align-center u-clearfix u-image u-shading u-valign-bottom-xs u-section-1" src=""
-        data-image-width="1440" data-image-height="900" id="sec-f665">
+      <section className="row register">
         <div className="u-clearfix u-sheet u-sheet-1">
           <form id="formulaire" className="u-text u-text-default u-title u-text-1" method="get" onSubmit={this.handleSubmit}>
             <div className="u-clearfix u-sheet u-sheet-1">
