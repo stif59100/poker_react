@@ -1,7 +1,6 @@
 class FormsHelper 
 {
-    constructor(){
-    }
+  
 
     /**
      *

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { sha256 } from 'react-native-sha256';
 
 import {
   BrowserRouter as Router,
@@ -9,7 +8,6 @@ import {
   
 } from "react-router-dom";
 
-//import Menus from './Models/Menus';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import './styles/main.scss';

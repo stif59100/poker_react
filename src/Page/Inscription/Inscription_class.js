@@ -31,7 +31,7 @@ class Inscription extends React.Component{
 } /// handleChange
   handleSubmit = (event) => {
     event.preventDefault();
-    let url = "http://localhost:8080/inscription"
+    let url = "http://localhost:8080/register"
     url += "?nom_utilisateur=" + this.state.nom_utilisateur
     url += "&prenom_utilisateur=" + this.state.prenom_utilisateur
     url += "&pseudo_utilisateur=" + this.state.prenom_utilisateur

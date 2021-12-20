@@ -5,7 +5,7 @@ import { sha256 } from "sha256";
 class Profile 
 {
 
-    url = 'http://localhost:8080/joueurmancheparmanche/';
+    url = 'http://localhost:8080/authentication';
     _firstName = "";
     _lastName = "";
     _email = "";
