@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import sha256 from 'sha256';
 import { useEffect, useRef } from "react";
 import { observer } from 'mobx-react-lite';
 var resultText = ""
@@ -8,11 +8,11 @@ class Inscription extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
-      nom_utilisateur: this.props.nom_utilisateur,
-      prenom_utilisateur: this.props.prenom_utilisateur,
-      pseudo_utilisateur: this.props.pseudo_utilisateur,
-      email_utilisateur: this.props.email_utilisateur,
-      mot_de_passe_utilisateur: this.props.mot_de_passe_utilisateur
+      name_user: this.props.name_user,
+      firstname_user: this.props.firstname_user,
+      pseudo_user: this.props.pseudo_user,
+      email_user: this.props.email_user,
+      password_user: this.props.password_user
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,12 +32,22 @@ class Inscription extends React.Component{
   handleSubmit = (event) => {
     event.preventDefault();
     let url = "http://localhost:8080/register"
-    url += "?nom_utilisateur=" + this.state.nom_utilisateur
-    url += "&prenom_utilisateur=" + this.state.prenom_utilisateur
-    url += "&pseudo_utilisateur=" + this.state.prenom_utilisateur
-    url += "&email_utilisateur=" + this.state.email_utilisateur
-    url += "&mot_de_passe_utilisateur=" + this.state.mot_de_passe_utilisateur
-    fetch(url)
+
+    var user = { "name_user" : this.state.name_user,
+    "firstname_user" : this.state.firstname_user,
+     "pseudo_user" : this.state.pseudo_user,
+    "email_user" : this.state.email_user,
+     "password_user" : sha256(this.state.password_user) }
+    var data = {
+      method : "POST",
+      body: JSON.stringify(user), 
+      headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+    }
+  }
+    console.log(user)
+    fetch(url,data)
       .then(response => {
         console.log(response.json())
         return response.json()
@@ -68,17 +78,17 @@ class Inscription extends React.Component{
         <div className="u-clearfix u-sheet u-sheet-1">
           <form id="formulaire" className="u-text u-text-default u-title u-text-1" method="get" onSubmit={this.handleSubmit}>
             <div className="u-clearfix u-sheet u-sheet-1">
-              <label>Nom</label>
-              <input name="nom_utilisateur"className="name" type="text" placeholder="Saisissez votre nom" onChange={this.handleChange.bind(this.nom_utilisateur)} value={this.nom_utilisateur}/><br />
-              <label>Prénom</label>
-              <input name="prenom_utilisateur"className="name" type="text" placeholder="Saisissez votre prénom" onChange={this.handleChange.bind(this)}/><br />
+              <label>name</label>
+              <input name="name_user"className="name" type="text" placeholder="Saisissez votre name" onChange={this.handleChange.bind(this.name_user)} value={this.name_user}/><br />
+              <label>Préname</label>
+              <input name="firstname_user"className="name" type="text" placeholder="Saisissez votre préname" onChange={this.handleChange.bind(this)}/><br />
               <label>Pseudo</label>
-              <input name="pseudo_utilisateur"className="name" type="text" placeholder="Choisissez votre pseudo" onChange={this.handleChange.bind(this)} value={this.pseudo_utilisateur}/><br />
+              <input name="pseudo_user"className="name" type="text" placeholder="Choisissez votre pseudo" onChange={this.handleChange.bind(this)} value={this.pseudo_user}/><br />
               <label>Votre adresse email</label>
-              <input name="email_utilisateur"className="name" type="text" placeholder="Saisissez votre email" value={this.email_utilisateur} onChange={this.handleChange.bind(this)}/><br />
+              <input name="email_user"className="name" type="text" placeholder="Saisissez votre email" value={this.email_user} onChange={this.handleChange.bind(this)}/><br />
               <input className="name" type="text" placeholder="Saisissez votre email une seconde fois"/><br />
               <label>Mot de passe</label>
-              <input name="mot_de_passe_utilisateur"className="name" type="password" placeholder="Saisissez votre mot de passe" onChange={this.handleChange.bind(this)} value={this.mot_de_passe_utilisateur} /><br />
+              <input name="password_user"className="name" type="password" placeholder="Saisissez votre mot de passe" onChange={this.handleChange.bind(this)} value={this.password_user} /><br />
               <input className="name" type="password" placeholder="Confirmez votre mot de passe" /><br />
               <input type="submit" value="Envoyer" onChange={this.handleChange.bind(this)}/>
               <div className="submitForm">Identifiant ou mot de passe oublié?</div>

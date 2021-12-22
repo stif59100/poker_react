@@ -2,19 +2,19 @@ import Axios from "axios";
 import {makeAutoObservable} from 'mobx';
 
 class PlayerRound{
-    urlbymanche = 'http://localhost:8080/joueurmancheparmanche/';
-    urlbyuser =  "http://localhost:8080/joueurmancheparutilisateur/";
+    urlbyround = 'http://localhost:8080/roundByRoundId/';
+    urlbyuser =  "http://localhost:8080/roundByUserId/";
     name=''
     _users = [];
-    _manches = [];
+    _rounds = [];
 
     constructor(){
-        this.fetchManche(9)
+        this.fetchround(9)
         makeAutoObservable(this);
     }
     
-    fetchUsers(id_manche){
-        Axios.get(this.urlbymanche+id_manche)
+    fetchUsers(id_round){
+        Axios.get(this.urlbyround+id_round)
         .then((result)=>{
             console.log(result.data);  
             this.users = result.data;
@@ -22,13 +22,13 @@ class PlayerRound{
         ).catch();
     }
 
-    fetchManche(id_joueur){
-        Axios.get(this.urlbyuser+id_joueur)
+    fetchround(id_user){
+        Axios.get(this.urlbyuser+id_user)
         .then((result)=>{
-            console.log("je suis dans fetch  manche")
+            console.log("je suis dans fetch  round")
             console.log(result.data); 
-            this.manches = result.data;
-            console.log(this.manches); 
+            this.rounds = result.data;
+            console.log(this.rounds); 
 
         }
         ).catch();
@@ -40,16 +40,16 @@ class PlayerRound{
     set users(value){
         this._users = value;
     }
-    get manches(){
-        console.log("je suis dans get manche")
-        console.log(this._manches)
+    get rounds(){
+        console.log("je suis dans get round")
+        console.log(this._rounds)
 
-        return this._manches;
+        return this._rounds;
     }
-    set manches(value){
-        console.log("setter manches")
+    set rounds(value){
+        console.log("setter rounds")
         console.log(value)
-        this._manches = value;
+        this._rounds = value;
     }
 }
 export default new PlayerRound();
