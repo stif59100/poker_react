@@ -19,16 +19,16 @@ import Menus from './Models/Menus';
       (route, index) =>
   
       <Route path={route.path} exact={route.exact} key={index}>
-        <route.component/>
+        <route.component />
       </Route>
     )
   }
 </Switch>;
 ReactDOM.render(
   <React.StrictMode>      
-      <Router>     
-      <Header/>
-        <Routes/>   
+      <Router >     
+      <Header />
+        <Routes />   
         <Footer/> 
       </Router>
   </React.StrictMode>,

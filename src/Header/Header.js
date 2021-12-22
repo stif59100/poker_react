@@ -3,18 +3,12 @@ import RightHeader from "./RightHeader";
 import LeftHeader from "./LeftHeader";
 const Header = () => {
   return (
-    <header className="row bg-grey">
-      <div className="col-12">
-        <div className="row">
+    <header className="col-12 bg-grey">
+      <div className="row top-bar">
           <LeftHeader />
           <RightHeader />
-        </div>
       </div>
-      <div className="col-12">
-        <div className="row">
           <Menu />
-        </div>
-      </div>
     </header>
 
   );

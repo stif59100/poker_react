@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { makeAutoObservable } from 'mobx';
-import { sha256 } from "sha256";
+import  sha256  from "sha256";
 
 class Profile 
 {
@@ -17,7 +17,7 @@ class Profile
     fetchGetProfile(email, password) {
         var passwordHash = sha256(password);
         var userBeforeAuth = { email: email, password: passwordHash }
-        Axios.post(this.urlbymanche, userBeforeAuth)
+        Axios.post(this.url, userBeforeAuth)
             .then((result) => {
                 this._firstName = result.firstName;
                 this._lastName = result.lastName;

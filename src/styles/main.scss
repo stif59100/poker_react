@@ -5,8 +5,116 @@
 }
 .u-overlap:not(.u-sticky-scroll) .u-header {
         background-color: #4d4d4d !important;
+        margin-right:50px;
     }
 
     .bg-grey {
         background-color: #4d4d4d !important;
     }
+    footer{
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+    section{
+        min-height: 800px;
+        background: url("/images/thumb-1920-201750.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+.menu {
+    min-height: 100px;
+    img{
+        max-width: 275px;
+    }
+    #navbarSupportedContent 
+    {
+            ul.navbar-nav{
+            width: 100%;
+            margin-right: 50px;
+        
+            li.nav-item{
+            
+                .active{
+                    border-width: 0 0 2px 0;
+                    border-style: solid;
+                    border-color: #1a1a1a;
+                }
+                a.nav-link{ 
+                    color:white;
+                    &:hover{
+                        color:black;
+                        border-width:  0 0 2px 0;  
+                        border-style: solid;
+                        border-color: #808080;
+                    }
+                    span{
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+.top-bar{
+    min-height: 86px;
+}
+.icons-social{
+     a{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-left: 5px;
+        }   
+    .fb{
+        background-color: rgb(59, 89, 152) !important;
+        color:white;      
+          padding: 5px;
+          border-radius: 50%;
+    }
+    .twitter{
+        background-color:rgb(85, 172, 238) !important;
+        color:white;        padding: 5px; 
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+    }
+    .instagram{
+        background-color: rgb(197, 54, 164) !important;
+        color:white;
+        padding: 5px;
+        border-radius: 50%;
+    }
+}
+
+.home{
+    color:white;
+    h1{
+        margin:50px 0 0;
+    }
+    h2{
+        margin :215px 0 0;
+    }
+}
+.search{
+    input{
+        background-color: #808080;
+        color:white;
+        margin-right:50px;
+     &:focus{
+        background-color: #808080;
+        color:white;
+     }
+     &:placeholder {
+        color: white;
+        font-size: 1.5em;
+      }
+    }
+}
+.authentication{
+    color:white;
+    font-size: 50px;
+    form{
+        margin:50px 0 0;
+    }
+}
