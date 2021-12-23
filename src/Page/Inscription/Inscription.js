@@ -10,7 +10,7 @@ const Inscription = () => {
     alert('inscription ok')
   }
   return (
-    <section className="row">
+    <section className="col-12">
     <div className="u-clearfix u-sheet u-sheet-1">
       <form id="formulaire" className="u-text u-text-default u-title u-text-1" method="get" onSubmit={submit} >
         <div className="u-clearfix u-sheet u-sheet-1">

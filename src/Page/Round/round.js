@@ -41,7 +41,7 @@ const Round = () => {
         setPoint(event.target.value)
     }
     return (
-        <section className="row round">
+        <section className="col-12 round">
             <div className="u-clearfix u-sheet u-sheet-1">
                 <div className="u-text u-text-default u-title u-text-1"></div>
                 <div className="u-text u-text-default u-text-2">

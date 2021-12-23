@@ -20,15 +20,19 @@
         min-height: 800px;
         background: url("/images/thumb-1920-201750.jpg");
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: 100% 100%;
     }
 .menu {
     min-height: 100px;
     img{
         max-width: 275px;
     }
+    .navbar-toggler{
+        background-color: white;
+    }
     #navbarSupportedContent 
     {
+    
             ul.navbar-nav{
             width: 100%;
             margin-right: 50px;
@@ -97,18 +101,21 @@
     }
 }
 .search{
-    input{
-        background-color: #808080;
-        color:white;
+    form{
         margin-right:50px;
-     &:focus{
-        background-color: #808080;
-        color:white;
-     }
-     &:placeholder {
-        color: white;
-        font-size: 1.5em;
-      }
+  
+        input{
+            background-color: #808080;
+            color:white;
+            &:focus{
+                background-color: #808080;
+                color:white;
+            }
+            &:placeholder {
+                color: white;
+                font-size: 1.5em;
+            }
+        }   
     }
 }
 .authentication{
