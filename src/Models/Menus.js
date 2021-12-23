@@ -6,6 +6,7 @@ import Inscription from '../Page/Inscription/Inscription_class';
 //import Inscription from '../Page/Inscription/Inscription';
 
 import ResetPassword from '../Page/ResetPassword/ResetPassword'
+import App from '../Page/Timer/timer';
 class Menus {
   _menus = [
     {
@@ -56,6 +57,7 @@ class Menus {
       name: 'Round',
       icon: ["fas", "trophy"]
     },
+    //
     {
       path: '/About',
       display : true,

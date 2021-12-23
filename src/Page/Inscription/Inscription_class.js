@@ -77,15 +77,15 @@ class Inscription extends React.Component{
         <div className="u-clearfix u-sheet u-sheet-1">
           <form id="formulaire" className="u-text u-text-default u-title u-text-1" method="get" onSubmit={this.handleSubmit}>
             <div className="u-clearfix u-sheet u-sheet-1">
-              <label>name</label>
-              <input name="name_user"className="name" type="text" placeholder="Saisissez votre name" onChange={this.handleChange.bind(this.name_user)} value={this.name_user}/><br />
-              <label>Préname</label>
-              <input name="firstname_user"className="name" type="text" placeholder="Saisissez votre préname" onChange={this.handleChange.bind(this)}/><br />
+              <label>Nom</label>
+              <input name="name_user"className="name" type="text" placeholder="Saisissez votre nom" onChange={this.handleChange.bind(this.name_user)} value={this.name_user}/><br />
+              <label>Prénom</label>
+              <input name="firstname_user"className="name" type="text" placeholder="Saisissez votre prénom" onChange={this.handleChange.bind(this)}/><br />
               <label>Pseudo</label>
               <input name="pseudo_user"className="name" type="text" placeholder="Choisissez votre pseudo" onChange={this.handleChange.bind(this)} value={this.pseudo_user}/><br />
               <label>Votre adresse email</label>
               <input name="email_user"className="name" type="text" placeholder="Saisissez votre email" value={this.email_user} onChange={this.handleChange.bind(this)}/><br />
-              <input className="name" type="text" placeholder="Saisissez votre email une seconde fois"/><br />
+              <input className="name" type="text" placeholder="Confirmez votre email"/><br />
               <label>Mot de passe</label>
               <input name="password_user"className="name" type="password" placeholder="Saisissez votre mot de passe" onChange={this.handleChange.bind(this)} value={this.password_user} /><br />
               <input className="name" type="password" placeholder="Confirmez votre mot de passe" /><br />

@@ -99,14 +99,14 @@
 .search{
     input{
         background-color: #808080;
-        color:white;
+        color:gold;
         margin-right:50px;
      &:focus{
         background-color: #808080;
-        color:white;
+        color:gold;
      }
      &:placeholder {
-        color: white;
+        color: gold;
         font-size: 1.5em;
       }
     }
@@ -116,5 +116,16 @@
     font-size: 50px;
     form{
         margin:50px 0 0;
+    }
+}
+
+.register{
+    color:white;
+    font-size: 50px;
+    form{
+        margin:50px 0 0;
+    }
+    input{
+        align-items: right;
     }
 }
