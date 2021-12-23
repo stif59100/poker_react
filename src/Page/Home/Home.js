@@ -1,7 +1,7 @@
 
 const Home = () => {
   return (
-    <section className="row home" >
+    <section className="col-12 home" >
       <div className="col-12 text-center">
         <h1 className="">Bienvenue sur poker Roubaix.</h1>
         <h2 className="">
