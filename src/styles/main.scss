@@ -1,27 +1,22 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 @import 'nicepage.scss';
-.leaflet-container{
-    min-height: 100vh;
-}
-.u-overlap:not(.u-sticky-scroll) .u-header {
-        background-color: #4d4d4d !important;
-        margin-right:50px;
-    }
 
-    .bg-grey {
-        background-color: #4d4d4d !important;
-    }
-    footer{
-        position: relative;
-        bottom: 0;
-        width: 100%;
-    }
-    section{
-        min-height: 800px;
-        background: url("/images/thumb-1920-201750.jpg");
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-    }
+$greydark:#4d4d4d;
+$greylight:#808080;
+$golddark:#FFD700;
+$goldlight:#FFDF00	;
+
+footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+section{
+    min-height: 800px;
+    background: url("/images/thumb-1920-201750.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 .menu {
     min-height: 100px;
     img{
@@ -32,49 +27,49 @@
     }
     #navbarSupportedContent 
     {
-    
-            ul.navbar-nav{
+        
+        ul.navbar-nav{
             width: 100%;
             margin-right: 50px;
-        
-            li.nav-item{
             
-                .active{
-                    border-width: 0 0 2px 0;
-                    border-style: solid;
-                    border-color: #1a1a1a;
-                }
+            li.nav-item{
                 a.nav-link{ 
                     color:white;
                     &:hover{
-                        color:black;
+                        color: $black;
                         border-width:  0 0 2px 0;  
                         border-style: solid;
-                        border-color: #808080;
+                        border-color: $goldlight;
                     }
                     span{
                         margin-left: 10px;
                     }
+                    
+                }
+                a.active{
+                    border-width: 0 0 2px 0;
+                    border-style: solid;
+                    border-color: black;
+                    color: $golddark;
+                    
                 }
             }
         }
     }
 }
-.top-bar{
-    min-height: 86px;
-}
+
 .icons-social{
-     a{
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         margin-left: 5px;
-        }   
+    a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+    }   
     .fb{
         background-color: rgb(59, 89, 152) !important;
         color:white;      
-          padding: 5px;
-          border-radius: 50%;
+        padding: 5px;
+        border-radius: 50%;
     }
     .twitter{
         background-color:rgb(85, 172, 238) !important;
@@ -101,20 +96,21 @@
     }
 }
 .search{
-
-    input{
-        background-color: #808080;
-        color:gold;
-        margin-right:50px;
-     &:focus{
-        background-color: #808080;
-        color:gold;
-     }
-     &:placeholder {
-        color: gold;
-        font-size: 1.5em;
-      }
-
+    .containerSearch{
+        margin-right: 50px;
+        input{
+            background-color: #808080;
+            color:$goldlight;
+            input{
+                &:focus{
+                    background-color: #808080;
+                    color:$goldlight;
+                }
+                ::placeholder {
+                    color: $goldlight;
+                }
+            }   
+        }
     }
 }
 .authentication{
@@ -125,6 +121,7 @@
     }
 }
 
+
 .register{
     color:white;
     font-size: 50px;
@@ -134,4 +131,112 @@
     input{
         align-items: right;
     }
+}
+
+
+// BORDER
+.border-grey-light{
+    border-color: $greylight;
+}
+
+.border-gold-dark{
+    border-color: $golddark;
+}
+.border-gold-light{
+    border-color: $goldlight;
+}
+.border-grey-dark{
+    border-color: $greydark;
+}
+//BACKGROUND
+.bg-gold-light{
+    background-color:$goldlight;
+}
+.bg-gold-dark{
+    background-color:$golddark;
+}
+
+.bg-grey-light {
+    background-color: $greylight;
+}
+.bg-grey-dark {
+    background-color: $greydark;
+}
+//COLOR
+.color-grey-light{
+    color:$greylight;
+}
+.color-gold-light{
+    color:$goldlight;
+}
+.color-gold-dark{
+    color:$golddark;
+}
+
+
+.color-grey-dark{
+    color:$greydark;
+}
+//BTN 
+.btn-gold-light{
+    color: $goldlight;
+    background-color: $greydark;
+    border-color: $goldlight;
+    font-weight: 400;
+    line-height: 1.5;
+    &:hover{
+        color: $greydark;
+        background-color: $goldlight;
+        border-color: $greydark;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+}
+.btn-grey-light{
+    color: $greydark;
+    background-color: $goldlight ;
+    border-color: $greydark;
+    &:hover{
+        color: $goldlight ;
+        background-color:$greydark;
+        border-color:$goldlight;
+    }
+}
+
+
+// INPUT 
+.input-gold-light{
+    color: $greydark;
+    background-color:$goldlight;
+    &:focus{
+        color: $goldlight ;
+        background-color: $greydark;
+        border-color:$goldlight ;
+    }
+
+}
+
+
+
+.input-grey-light{
+    color: $goldlight;
+    background-color:$greydark;
+    border-color:$goldlight;
+    &:focus{
+        color: $greydark ;
+        background-color: $goldlight ;
+        border-color:$greydark ;
+    }
+}
+
+
+// TEXT
+.text-gold-light{
+    color: $goldlight;
+    background-color:$greydark;
+}
+.text-grey-light{
+    color: $greydark ;
+    background-color:$goldlight;
+    
 }

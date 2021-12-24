@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { observer } from 'mobx-react-lite';
 var resultText = ""
 
-class Inscription extends React.Component{
+class Inscription extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,29 +25,35 @@ class Inscription extends React.Component{
     console.log("name : " + name)
     console.log("value : " + value)
     this.setState({
-        [name]: value /// Pour faire du générique
+      [name]: value /// Pour faire du générique
     })
-    
-} /// handleChange
+
+  } /// handleChange
   handleSubmit = (event) => {
     event.preventDefault();
     let url = "http://localhost:8080/register"
 
-    var user = { "name_user" : this.state.name_user,
-    "firstname_user" : this.state.firstname_user,
-     "pseudo_user" : this.state.pseudo_user,
-    "email_user" : this.state.email_user,
-     "password_user" : sha256(this.state.password_user) }
-    var data = {
-      method : "POST",
-      body: JSON.stringify(user), 
-      headers:{
-        "Content-Type":"application/json",
-        "Accept":"application/json"
+    var user = {
+      "name_user": this.state.name_user,
+      "firstname_user": this.state.firstname_user,
+      "pseudo_user": this.state.pseudo_user,
+      "email_user": this.state.email_user,
+      "password_user": sha256(this.state.password_user)
     }
-  }
+    var data = {
+      method: "POST",
+      mode: 'cors',
+      cache: 'default',
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin":"*",
+        'Access-Control-Allow-Methods':"POST"
+      }
+    }
     console.log(user)
-    fetch(url,data)
+    fetch(url, data)
       .then(response => {
         console.log(response.json())
         return response.json()
@@ -69,36 +75,42 @@ class Inscription extends React.Component{
           console.log(error)
         }
       )
-      
+
   };
-  render(){
+  render() {
     return (
       <section className="row register">
-        <div className="u-clearfix u-sheet u-sheet-1">
-          <form id="formulaire" className="u-text u-text-default u-title u-text-1" method="get" onSubmit={this.handleSubmit}>
-            <div className="u-clearfix u-sheet u-sheet-1">
-              <label>Nom</label>
-              <input name="name_user"className="name" type="text" placeholder="Saisissez votre nom" onChange={this.handleChange.bind(this.name_user)} value={this.name_user}/><br />
-              <label>Prénom</label>
-              <input name="firstname_user"className="name" type="text" placeholder="Saisissez votre prénom" onChange={this.handleChange.bind(this)}/><br />
-              <label>Pseudo</label>
-              <input name="pseudo_user"className="name" type="text" placeholder="Choisissez votre pseudo" onChange={this.handleChange.bind(this)} value={this.pseudo_user}/><br />
-              <label>Votre adresse email</label>
-              <input name="email_user"className="name" type="text" placeholder="Saisissez votre email" value={this.email_user} onChange={this.handleChange.bind(this)}/><br />
-              <input className="name" type="text" placeholder="Confirmez votre email"/><br />
-              <label>Mot de passe</label>
-              <input name="password_user"className="name" type="password" placeholder="Saisissez votre mot de passe" onChange={this.handleChange.bind(this)} value={this.password_user} /><br />
-              <input className="name" type="password" placeholder="Confirmez votre mot de passe" /><br />
-              <input type="submit" value="Envoyer" onChange={this.handleChange.bind(this)}/>
-              <div className="submitForm">Identifiant ou mot de passe oublié?</div>
+        <div className="col-12 col-lg-6 offset-lg-3">
+          <form id="formulaire" className="form-inline" onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="nameImput" className="w-100 text-left color-gold-light">Nom</label>
+              <input name="name_user" className="form-control input-grey-light" id="nameImput" type="text" placeholder="Saisissez votre nom" onChange={this.handleChange.bind(this.name_user)} value={this.name_user} />
             </div>
+            <div className="form-group">
+              <label className="w-100 text-left color-gold-light">Prénom</label>
+              <input name="firstname_user" className="form-control input-grey-light" type="text" placeholder="Saisissez votre prénom" onChange={this.handleChange.bind(this)} />
+            </div>
+            <div className="form-group">
+              <label className="w-100 text-left color-gold-light">Pseudo</label>
+              <input name="pseudo_user" className="form-control input-grey-light" type="text" placeholder="Choisissez votre pseudo" onChange={this.handleChange.bind(this)} value={this.pseudo_user} />
+            </div>
+            <div className="form-group">
+              <label className="w-100 text-left color-gold-light">Votre adresse email</label>
+              <input name="email_user" className="form-control input-grey-light" type="text" placeholder="Saisissez votre email" value={this.email_user} onChange={this.handleChange.bind(this)} />
+              <input className="form-control input-grey-light" type="text" placeholder="Confirmez votre email" />
+            </div>
+            <div className="form-group">
+              <label className="w-100 text-left color-gold-light">Mot de passe</label>
+              <input name="password_user" className="form-control input-grey-light" type="password" placeholder="Saisissez votre mot de passe" onChange={this.handleChange.bind(this)} value={this.password_user} />
+              <input className="form-control input-grey-light" type="password" placeholder="Confirmez votre mot de passe" />
+            </div>
+            <button type="submit" className="btn btn-gold-light" >valider</button>
           </form>
-  
         </div>
       </section>
     )
   }
-  
+
 };
 
 export default Inscription;

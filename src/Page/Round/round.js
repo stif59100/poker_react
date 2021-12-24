@@ -42,7 +42,7 @@ const Round = () => {
     }
     return (
         <section className="col-12 round">
-            <div className="u-clearfix u-sheet u-sheet-1">
+            <div className="row">
                 <div className="u-text u-text-default u-title u-text-1"></div>
                 <div className="u-text u-text-default u-text-2">
 
@@ -50,10 +50,7 @@ const Round = () => {
                         <table>
                             <tbody>
                                 <tr>
-                                    
                                     <th colSpan='3'>Manche<td><select><option>Sélection de manche</option></select></td></th> 
-                                    
-                                    
                                 </tr>
                                 <tr>
                                     <th>Date</th>

@@ -9,7 +9,7 @@ class Profile
     _firstName = "";
     _lastName = "";
     _email = "";
-
+    _loggedIn=false;
     constructor() {
         makeAutoObservable(this);
     }
@@ -18,11 +18,15 @@ class Profile
         var passwordHash = sha256(password);
         var userBeforeAuth = { email: email, password: passwordHash }
         Axios.post(this.url, userBeforeAuth)
-            .then((result) => {
-                this._firstName = result.firstName;
-                this._lastName = result.lastName;
-                this._email = result.email;
-            })
+            .then((response) => {
+                return response.data
+            }).then((user)=>{
+                console.log(user)
+                this._firstName = user.firstname_user;
+                this._lastName = user.name_user;
+                this._email = user.email_user;
+                this._loggedIn = true;
+                 })
             .catch(function (error) {
                 console.log(error);
             });
@@ -43,6 +47,9 @@ class Profile
     }
     set email(value){
         this.email=value;
+    }
+    get loggedIn(){
+        return this._loggedIn;
     }
 }
 

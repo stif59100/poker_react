@@ -3,43 +3,12 @@ import { Link } from "react-router-dom";
 import Menus from '../Models/Menus';
 import { useLocation } from 'react-router-dom'
 import React, { useState } from 'react';
-const BackButton = routeProps => (routeProps.location.pathname !== "/")
-  ? <div className="col-12">
-    <Link className='btn btn-outline-secondary' to="/">Home</Link>
-  </div>
-  : null;
-const Icons = (route) => typeof (route.icon) !== "undefined" ? <FontAwesomeIcon icon={route.icon} size="1x" /> : null
-const Links = () => {
-  const location = useLocation();
-  let liClass = "nav-item";
-  return Menus.Menus.map(
-    (route, index) => (
-      (route.display) ?
-        (location.pathname === route.path)
-          ?
-          <li className={liClass} key={index} eventKey="{index}">
-            <Link to={route.path} className="nav-link active ">
-              <Icons {...route} />
-              <span>{route.name}</span>
-            </Link>
-          </li>
-          : <li className={liClass} key={index}>
-            <Link to={route.path} className="nav-link">
-              <Icons {...route} />
-              <span>{route.name}</span>
-            </Link>
-          </li>
-        : null
-    )
-  )
-}
 
-const Menu = () => {
+const Menu = (props) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
-
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
-    <div className="row menu">
+   <div className="row menu">
       <div className="col-12  col-lg-3 offset-lg-1">
         <img src={process.env.PUBLIC_URL + '/images/logo_small.png'} className="img-fluid" alt="test" />
       </div>
@@ -52,7 +21,7 @@ const Menu = () => {
           </button>
           <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarSupportedContent">
             <ul className="navbar-nav justify-content-end">
-              <Links />
+              <Links Profile={props.Profile}/>
             </ul>
           </div>
         </navbar>
@@ -61,5 +30,60 @@ const Menu = () => {
 
   )
 }
+const Links = (props) => {
+  return Menus.Menus.map(
+    (route, index) => {
+      console.log(props.Profile.loggedIn)
+
+     return (props.Profile.loggedIn)?
+         (route.displayLoggedIn )?<LinksLogged route={route} index={index}></LinksLogged>:null
+      :(route.display)?<LinksNoLogged route={route} index={index} key={index} ></LinksNoLogged>:null
+    }
+  )
+}
+const LinksNoLogged = (props) => {
+  const location = useLocation();
+  console.log("LinksNoLogged")
+  console.log(props.route.path)
+  return (location.pathname === props.route.path)?
+  <LinkActive route={props.route} index={props.index} ></LinkActive>:
+  <LinkNoActive route={props.route} index={props.index}></LinkNoActive>
+}
+
+const LinksLogged = (props)=>{
+  const location = useLocation();
+  console.log(props.route)
+  return (location.pathname === props.route.path)?
+  <LinkActive route={props.route} index={props.index}></LinkActive>:
+  <LinkNoActive route={props.route} index={props.index}></LinkNoActive>
+
+}
+
+
+const LinkActive = (props) =>{
+  console.log(props.route)
+ return <li className="nav-item active" key={props.index} >
+    <Link to={props.route.path} className="nav-link active ">
+      <Icons {...props.route} />
+      <span>{props.route.name}</span>
+    </Link>
+  </li>
+}
+const LinkNoActive = (props) =>{
+  return <li className="nav-item" key={props.index} >
+  <Link to={props.route.path} className="nav-link">
+    <Icons {...props.route} />
+    <span>{props.route.name}</span>
+  </Link>
+</li>
+}
+  
+const Icons = (route) => typeof (route.icon) !== "undefined" ? <FontAwesomeIcon icon={route.icon} size="1x" /> : null
 
 export default Menu;
+
+// const BackButton = routeProps => (routeProps.location.pathname !== "/")
+//   ? <div className="col-12">
+//     <Link className='btn btn-outline-secondary' to="/">Home</Link>
+//   </div>
+//   : null;

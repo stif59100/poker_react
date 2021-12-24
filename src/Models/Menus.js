@@ -4,15 +4,16 @@ import Championship from '../Page/Championship/Championship';
 import Round from '../Page/Round/round';
 import Inscription from '../Page/Inscription/Inscription_class';
 //import Inscription from '../Page/Inscription/Inscription';
+import ResetPassword from '../Page/ResetPassword/ResetPassword';
 
-import ResetPassword from '../Page/ResetPassword/ResetPassword'
-import App from '../Page/Timer/timer';
+
 class Menus {
   _menus = [
     {
       path: '/',
       exact: true,
       display : true,
+      displayLoggedIn : true,
       component: Home,
       name: 'Home',
       icon:["fas", "home"]
@@ -21,12 +22,14 @@ class Menus {
       path: '/resetPassword',
       exact: true,
       display : false,
+      displayLoggedIn : false,
       component: ResetPassword,
       name: 'ResetPassword'
     },
     {
       path: '/Inscription',
       display : true,
+      displayLoggedIn : false,
       exact: true,
       component: Inscription,
       name: 'Inscription',
@@ -36,6 +39,7 @@ class Menus {
     {
       path: '/ChampionShip',
       exact: true,
+      displayLoggedIn : true,
       display : true,
       component: Championship,
       name: 'Championnat',
@@ -44,6 +48,7 @@ class Menus {
     {
       path: '/Authentication',
       exact: true,
+      displayLoggedIn : false,
       display : true,
       component: Authentication,
       name: 'Authentification',
@@ -52,6 +57,7 @@ class Menus {
     {
       path: '/Round',
       display : true,
+      displayLoggedIn : true,
       exact: true,
       component: Round,
       name: 'Round',
@@ -60,6 +66,7 @@ class Menus {
     //
     {
       path: '/About',
+      displayLoggedIn : true,
       display : true,
       exact: true,
       component: Authentication,
