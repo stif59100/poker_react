@@ -11,21 +11,25 @@ import './styles/main.scss';
 import './fonts.js';
 
 
-const Routes = observer(() => {
-  const [profile, setprofile] = useState(Profile);
+const Routes = () => {
+  
+  useEffect(()=>{
+    console.log("use effect index");
+
+  })
   return <Switch>
     {
       Menus.Menus.map(
         (route, index) =>
           <Route path={route.path} exact={route.exact} key={index}>
-            <Header Profile={profile} />
-            <route.component Profile={profile} />
+            <Header Profile={Profile}/>
+            <route.component Profile={Profile} />
             <Footer />
           </Route>
       )
     }
   </Switch>
-})
+}
 ReactDOM.render(
   <React.StrictMode>
     <Router >

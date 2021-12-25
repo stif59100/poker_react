@@ -4,12 +4,11 @@ import  sha256  from "sha256";
 
 class Profile 
 {
-
     url = 'http://localhost:8080/authentication';
     _firstName = "";
     _lastName = "";
     _email = "";
-    _loggedIn=false;
+    _loggedIn = false;
     constructor() {
         makeAutoObservable(this);
     }
@@ -21,7 +20,6 @@ class Profile
             .then((response) => {
                 return response.data
             }).then((user)=>{
-                console.log(user)
                 this._firstName = user.firstname_user;
                 this._lastName = user.name_user;
                 this._email = user.email_user;
@@ -31,7 +29,6 @@ class Profile
                 console.log(error);
             });
     }
-
 
     set firstName(value){
         this._firstName=value;
@@ -46,7 +43,10 @@ class Profile
         return this._lastName;
     }
     set email(value){
-        this.email=value;
+        this._email=value;
+    }
+    get email(){
+        return this._email;
     }
     get loggedIn(){
         return this._loggedIn;

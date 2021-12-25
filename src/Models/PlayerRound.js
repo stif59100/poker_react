@@ -9,7 +9,6 @@ class PlayerRound{
     _rounds = [];
 
     constructor(){
-        this.fetchround(9)
         makeAutoObservable(this);
     }
     

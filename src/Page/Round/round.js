@@ -51,6 +51,7 @@ const Round = () => {
                             <tbody>
                                 <tr>
                                     <th colSpan='3'>Manche<td><select><option>Sélection de manche</option></select></td></th> 
+                                    
                                 </tr>
                                 <tr>
                                     <th>Date</th>

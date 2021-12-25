@@ -33,8 +33,6 @@ const Menu = (props) => {
 const Links = (props) => {
   return Menus.Menus.map(
     (route, index) => {
-      console.log(props.Profile.loggedIn)
-
      return (props.Profile.loggedIn)?
          (route.displayLoggedIn )?<LinksLogged route={route} index={index}></LinksLogged>:null
       :(route.display)?<LinksNoLogged route={route} index={index} key={index} ></LinksNoLogged>:null
@@ -43,8 +41,6 @@ const Links = (props) => {
 }
 const LinksNoLogged = (props) => {
   const location = useLocation();
-  console.log("LinksNoLogged")
-  console.log(props.route.path)
   return (location.pathname === props.route.path)?
   <LinkActive route={props.route} index={props.index} ></LinkActive>:
   <LinkNoActive route={props.route} index={props.index}></LinkNoActive>
@@ -52,7 +48,6 @@ const LinksNoLogged = (props) => {
 
 const LinksLogged = (props)=>{
   const location = useLocation();
-  console.log(props.route)
   return (location.pathname === props.route.path)?
   <LinkActive route={props.route} index={props.index}></LinkActive>:
   <LinkNoActive route={props.route} index={props.index}></LinkNoActive>
@@ -61,7 +56,6 @@ const LinksLogged = (props)=>{
 
 
 const LinkActive = (props) =>{
-  console.log(props.route)
  return <li className="nav-item active" key={props.index} >
     <Link to={props.route.path} className="nav-link active ">
       <Icons {...props.route} />
@@ -81,9 +75,3 @@ const LinkNoActive = (props) =>{
 const Icons = (route) => typeof (route.icon) !== "undefined" ? <FontAwesomeIcon icon={route.icon} size="1x" /> : null
 
 export default Menu;
-
-// const BackButton = routeProps => (routeProps.location.pathname !== "/")
-//   ? <div className="col-12">
-//     <Link className='btn btn-outline-secondary' to="/">Home</Link>
-//   </div>
-//   : null;

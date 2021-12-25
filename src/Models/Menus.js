@@ -5,7 +5,7 @@ import Round from '../Page/Round/round';
 import Inscription from '../Page/Inscription/Inscription_class';
 //import Inscription from '../Page/Inscription/Inscription';
 import ResetPassword from '../Page/ResetPassword/ResetPassword';
-
+import Profile from '../Page/Profile/Profile';
 
 class Menus {
   _menus = [
@@ -56,14 +56,22 @@ class Menus {
     },
     {
       path: '/Round',
-      display : true,
+      display : false,
       displayLoggedIn : true,
       exact: true,
       component: Round,
       name: 'Round',
       icon: ["fas", "trophy"]
     },
-    //
+    {
+      path: '/Profile',
+      display : false,
+      displayLoggedIn : true,
+      exact: true,
+      component: Profile,
+      name: 'Profile',
+      icon: ["fas","user"]
+    },
     {
       path: '/About',
       displayLoggedIn : true,
