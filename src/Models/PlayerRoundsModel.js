@@ -1,7 +1,7 @@
 import Axios from "axios";
 import {makeAutoObservable} from 'mobx';
 
-class PlayerRound{
+class PlayerRoundsModel{
     urlbyround = 'http://localhost:8080/roundByRoundId/';
     urlbyuser =  "http://localhost:8080/roundByUserId/";
     name=''
@@ -21,7 +21,7 @@ class PlayerRound{
         ).catch();
     }
 
-    fetchround(id_user){
+    fetchRound(id_user){
         Axios.get(this.urlbyuser+id_user)
         .then((result)=>{
             console.log("je suis dans fetch  round")
@@ -42,7 +42,6 @@ class PlayerRound{
     get rounds(){
         console.log("je suis dans get round")
         console.log(this._rounds)
-
         return this._rounds;
     }
     set rounds(value){
@@ -51,4 +50,4 @@ class PlayerRound{
         this._rounds = value;
     }
 }
-export default new PlayerRound();
+export default new PlayerRoundsModel();

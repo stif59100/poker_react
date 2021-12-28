@@ -1,46 +1,69 @@
 import Home from '../Page/Home/Home';
 import Authentication from '../Page/Authentication/Authentication';
 import Championship from '../Page/Championship/Championship';
-import Round from '../Page/Round/round';
-import Inscription from '../Page/Inscription/Inscription_class';
-//import Inscription from '../Page/Inscription/Inscription';
+import Rounds from '../Page/Round/Rounds';
+import Register from '../Page/Register/Register_class';
 import ResetPassword from '../Page/ResetPassword/ResetPassword';
 import Profile from '../Page/Profile/Profile';
+import ErrorsRights from '../Page/Errors/ErrorsRights';
 
 class Menus {
+
+  _activateMenuByRoute = [
+    {
+      route: "/",
+      menuName: "Home"
+    }, 
+    {
+      route: "/ResetPassword",
+      menuName: "Home"
+    },
+    , 
+    {
+      route: "/Register",
+      menuName: "Register"
+    },
+    , 
+    {
+      route: "/Round",
+      menuName: "Round"
+    }
+  ]
+
+
   _menus = [
     {
       path: '/',
       exact: true,
-      display : true,
-      displayLoggedIn : true,
+      display: true,
+      displayLoggedIn: true,
       component: Home,
       name: 'Home',
-      icon:["fas", "home"]
+      icon: ["fas", "home"]
     },
     {
-      path: '/resetPassword',
+      path: '/ResetPassword',
       exact: true,
-      display : false,
-      displayLoggedIn : false,
+      display: false,
+      displayLoggedIn: false,
       component: ResetPassword,
       name: 'ResetPassword'
     },
     {
-      path: '/Inscription',
-      display : true,
-      displayLoggedIn : false,
+      path: '/Register',
+      display: true,
+      displayLoggedIn: false,
       exact: true,
-      component: Inscription,
-      name: 'Inscription',
+      component: Register,
+      name: 'Register',
       icon: ["fas", "trophy"]
     },
-    
+
     {
       path: '/ChampionShip',
       exact: true,
-      displayLoggedIn : true,
-      display : true,
+      displayLoggedIn: true,
+      display: true,
       component: Championship,
       name: 'Championnat',
       icon: ["fas", "trophy"]
@@ -48,37 +71,45 @@ class Menus {
     {
       path: '/Authentication',
       exact: true,
-      displayLoggedIn : false,
-      display : true,
+      displayLoggedIn: false,
+      display: true,
       component: Authentication,
       name: 'Authentification',
       icon: ["fas", "sign-in-alt"]
     },
     {
-      path: '/Round',
-      display : false,
-      displayLoggedIn : true,
+      path: '/Rounds',
+      display: false,
+      displayLoggedIn: true,
       exact: true,
-      component: Round,
-      name: 'Round',
+      component: Rounds,
+      name: 'Rounds',
       icon: ["fas", "trophy"]
     },
     {
       path: '/Profile',
-      display : false,
-      displayLoggedIn : true,
+      display: false,
+      displayLoggedIn: true,
       exact: true,
       component: Profile,
       name: 'Profile',
-      icon: ["fas","user"]
+      icon: ["fas", "user"]
     },
     {
       path: '/About',
-      displayLoggedIn : true,
-      display : true,
+      displayLoggedIn: true,
+      display: true,
       exact: true,
       component: Authentication,
       name: 'A propos'
+    }
+    ,
+    {
+      path: '/ErrorRights',
+      displayLoggedIn: false,
+      display: false,
+      exact: true,
+      component: ErrorsRights
     }
   ];
   constructor() {

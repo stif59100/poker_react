@@ -1,5 +1,4 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-@import 'nicepage.scss';
 
 $greydark:#4d4d4d;
 $greylight:#808080;
@@ -240,6 +239,11 @@ section{
     background-color:$goldlight;
     
 }
+
+//
+.action-round{
+    margin: 20px 0;
+} 
 
 
 

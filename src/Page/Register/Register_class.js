@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { observer } from 'mobx-react-lite';
 var resultText = ""
 
-class Inscription extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -113,4 +113,4 @@ class Inscription extends React.Component {
 
 };
 
-export default Inscription;
+export default Register;
