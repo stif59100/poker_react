@@ -2,7 +2,7 @@
 const Home = () => {
   return (
     <section className="col-12 home" >
-      <div className="row text-center">
+      <div className=" text-center">
         <h1 className="">Bienvenue sur poker Roubaix.</h1>
         <h2 className="">
           Un site d'amateur de poker venant de la ville de Roubaix.

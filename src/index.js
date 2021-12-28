@@ -22,9 +22,11 @@ const Routes = () => {
       Menus.Menus.map(
         (route, index) =>
           <Route path={route.path} exact={route.exact} key={index}>
+            <div className='row'>
             <Header Profile={Profile}/>
             <route.component Profile={Profile} />
             <Footer />
+            </div>
           </Route>
       )
     }
