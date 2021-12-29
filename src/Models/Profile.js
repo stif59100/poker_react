@@ -32,13 +32,17 @@ class Profile
 
     }
 
-    fetchGetProfile(email, password) {
+    fetchGetProfile(emailOrLogin, password) {
         var passwordHash = sha256(password);
-        var userBeforeAuth = { email: email, password: passwordHash }
+        var userBeforeAuth = { emailOrLogin: emailOrLogin, password: passwordHash }
         Axios.post(this._urlAuthentication, userBeforeAuth)
             .then((response) => {
                 return response.data
             }).then((user)=>{
+                if(typeof user.email_user === "undefined"){
+                    console.log("error user emty fetch")
+                    return;
+                }
                 this._firstName = user.firstname_user;
                 this._lastName = user.name_user;
                 this._email = user.email_user;

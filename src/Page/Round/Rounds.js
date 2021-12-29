@@ -91,6 +91,7 @@ const Rounds = (props) => {
 
 
     return (
+        // inaccessible si n'est pas logué
         (!props.Profile.loggedIn) ?
             <Redirect to="/"></Redirect> :
             (AddMode) ?

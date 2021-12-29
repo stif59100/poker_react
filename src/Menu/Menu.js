@@ -33,8 +33,13 @@ const Menu = (props) => {
 const Links = (props) => {
   return Menus.Menus.map(
     (route, index) => {
+      // condition pour savoir si l'utilisateur est logué 
      return (props.Profile.loggedIn)?
-         (route.displayLoggedIn )?<LinksLogged route={route} index={index}></LinksLogged>:null
+         (route.displayLoggedIn )
+         //est logué
+         ?<LinksLogged route={route} index={index}></LinksLogged>
+         // n'est pas logué
+         :null
       :(route.display)?<LinksNoLogged route={route} index={index} key={index} ></LinksNoLogged>:null
     }
   )

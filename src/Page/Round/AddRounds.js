@@ -3,7 +3,7 @@ import RoundsModel from "../../Models/RoundsModel";
 const FormAddRounds = (props) => {
     const [date, setDate] = useState();
     const [name, setName] = useState();
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const changeDate = (event) => {
         setDate(event.target.value)
     }

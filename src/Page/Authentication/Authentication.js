@@ -28,16 +28,10 @@ const Forms = observer((props) => {
   const onSubmit = (event) => {
     event.preventDefault();
     setErrorsForm([])
-    var emailTest = FormsHelper.isEmail(email)
-    if (!emailTest) {
-      setErrorsForm([{ message: "Email is not valid!", type: "email" }])
-    } else {
-
       if(!props.Profile.loggedIn){
         console.log("notlogged")
         props.Profile.fetchGetProfile(email, password);
       }
-    }
   }
   return (
     <section className="row authentication" >
@@ -46,7 +40,7 @@ const Forms = observer((props) => {
           <ErrorsForm {...errorsForm} ></ErrorsForm>
           <div className="form-group">
             <label htmlFor="inputEmail" className="w-100 text-left color-gold-light">Identifiant</label>
-            <input id="inputEmail" className="form-control input-grey-light" type="email" aria-describedby="emailHelp" placeholder="Votre adresse email ou pseudo" onChange={onChangeEmail} value={email} />
+            <input id="inputEmail" className="form-control input-grey-light" type="text" aria-describedby="emailHelp" placeholder="Votre adresse email ou pseudo" onChange={onChangeEmail} value={email} />
           </div>
           <div className="form-group">
             <label htmlFor="inputPassword" className="w-100 text-left color-gold-light">Mot de passe</label>
