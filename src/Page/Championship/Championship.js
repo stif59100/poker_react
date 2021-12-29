@@ -5,7 +5,7 @@ const Championship = () => {
   return (
     <section className="row">
       <div className="col-12 col-lg-6 offset-3 championship">
-        <table className="color-gold-light border-gold-light my-3">
+        <table className="table my-3 bg-grey-dark color-gold-light border-gold-light my-3 w-100">
           <tbody>
             <tr colSpan="3"><th colSpan={3}><select><option>Sélectionnez le championnat</option></select></th></tr>
             <tr>

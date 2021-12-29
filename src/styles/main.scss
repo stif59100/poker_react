@@ -191,6 +191,9 @@ section{
         font-weight: 400;
         line-height: 1.5;
     }
+    span{
+        margin: 0 10px;
+    }
 }
 .btn-grey-light{
     color: $greydark;
@@ -200,6 +203,9 @@ section{
         color: $goldlight ;
         background-color:$greydark;
         border-color:$goldlight;
+    }   
+    span{
+        margin: 0 10px;
     }
 }
 
@@ -214,6 +220,7 @@ section{
         border-color:$goldlight ;
     }
 
+
 }
 
 
@@ -222,6 +229,14 @@ section{
     color: $goldlight;
     background-color:$greydark;
     border-color:$goldlight;
+
+    ::placeholder{
+        color: $goldlight;
+    }
+    &:checked{
+        color: $goldlight;
+        background-color:$goldlight;
+    }
     &:focus{
         color: $greydark ;
         background-color: $goldlight ;

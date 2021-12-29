@@ -15,7 +15,6 @@ const Routes = () => {
   
   useEffect(()=>{
     console.log("use effect index");
-
   })
   return <Switch>
     {
@@ -35,9 +34,7 @@ const Routes = () => {
 ReactDOM.render(
   <React.StrictMode>
     <Router >
-
       <Routes />
-
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

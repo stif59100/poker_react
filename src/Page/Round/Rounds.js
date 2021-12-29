@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import AddRound from "./AddRounds";
 import RoundsModel from "../../Models/RoundsModel";
+import { fontAwesome } from 'fontawesome';
 
 
 
@@ -16,16 +17,19 @@ const Round = ({id_round, date_round, name_round }) => {
     return (
         <tr >
             <td >
-                <input className="form-check-input " type="checkbox" value={id_round} aria-label="..."  />
+                <input className="form-check-input input-grey-light" type="checkbox" value={id_round} aria-label="..."  />
             </td>
             <td class="selcect-round col">
                 <label className="text-gold-light">{date_round}</label>
             </td>
             <td class="name-round col">
-                <label>{name_round}</label>
+                <label className='color-gold-light'>{name_round}</label>
             </td>
             <td class="actions-round col">
-                <button type="button" class="btn btn-grey-light" onClick={handleClickRegister}>Register</button>
+                <button type="button" class="btn btn-grey-light" onClick={handleClickRegister}>
+                    <FontAwesomeIcon icon={["fas","registered"]}/>
+                    <span>Register</span>
+                    </button>
             </td>
         </tr>
     )
@@ -42,8 +46,14 @@ const ReadModeRounds = (props) =>
         <div className="row">
             <div className="col-12 col-lg-10 offset-lg-1">
                 <div className="action-round d-flex justify-content-end">
-                    <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>Ajouter</button>
-                    <button type='button' className="btn btn-gold-light" onClick={props.EnableDeleteMode}>Supprimer</button>
+                    <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
+                        <FontAwesomeIcon icon={['fa','plus']}/>
+                        <span> Ajouter</span>
+                        </button>
+                    <button type='button' className="btn btn-gold-light" onClick={props.EnableDeleteMode}>
+                        <FontAwesomeIcon icon={['fas','trash-alt']}/> 
+                        <span>Supprimer</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -52,19 +62,19 @@ const ReadModeRounds = (props) =>
                 <table className='table bg-grey-dark'>
                     <caption className="color-gold-light">List of rounds</caption>
                     <thead>
-                        <tr >
+                        <tr>
                             <th scope="col">
-                                <span>Select</span>
+                                <span className='color-gold-light'>Select</span>
                             </th>
                             <th scope="col">
                                 <FontAwesomeIcon icon={["far", "calendar"]}></FontAwesomeIcon>
-                                <span>Date</span>
+                                <span className='color-gold-light'>Date</span>
                             </th>
                             <th scope="col">
-                                <span>name</span>
+                                <span className='color-gold-light'>name</span>
                             </th>
                             <th scope="col">
-                                <span>name</span>
+                                <span className='color-gold-light'>action</span>
                             </th>
                         </tr>
                     </thead>

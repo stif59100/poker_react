@@ -6,14 +6,11 @@ class Profile
 {
     _urlAuthentication = 'http://localhost:8080/authentication';
     _urlRights = 'http://localhost:8080/';
-    _id=0;
-    _firstName = "";
-    _lastName = "";
-    _email = "";
-    _rights = [];
+    _user = {}
     _loggedIn = false;
     constructor() {
         makeAutoObservable(this);
+        this.getCurrentUser();
     }
 
 
@@ -23,8 +20,7 @@ class Profile
         .then((response) => {
             return response.data
         }).then((rights)=>{
-            this._rights = rights;
-            this.fetchGetRights();
+            this._user.rights = rights;
              })
         .catch(function (error) {
             console.log(error);
@@ -43,33 +39,30 @@ class Profile
                     console.log("error user emty fetch")
                     return;
                 }
-                this._firstName = user.firstname_user;
-                this._lastName = user.name_user;
-                this._email = user.email_user;
-                this._id =  user.id_user;
+                this._user.firstName = user.firstname_user;
+                this._user.lastName = user.name_user;
+                this._user.email = user.email_user;
+                this._user.id =  user.id_user;
+
                 this._loggedIn = true;
+                localStorage.setItem("user", JSON.stringify(this._user));
                 this.fetchGetRights();
                  })
             .catch(function (error) {
                 console.log(error);
             });
     }
-
-    get firstName() {
-        return this._firstName;
-    }
-    set lastName(value){
-        this._lastName = value;
-    }
-    get lastName(){
-        return this._lastName;
-    }
-    get email(){
-        return this._email;
-    }
-    get id(){
-        return this._id;
-    }
+    getCurrentUser(){
+        var user =  JSON.parse(localStorage.getItem("user"));
+    
+        if(user){
+            this._user.firstName = user.firstName;
+            this._user.lastName = user.lastName;
+            this._user.email = user.email;
+            this._user.id =  user.id;
+            this._loggedIn=true;
+        }
+    };
 
     get loggedIn(){
         return this._loggedIn;
