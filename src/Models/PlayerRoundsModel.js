@@ -4,6 +4,7 @@ import {makeAutoObservable} from 'mobx';
 class PlayerRoundsModel{
     urlbyround = 'http://localhost:8080/roundByRoundId/';
     urlbyuser =  "http://localhost:8080/roundByUserId/";
+    urlregister = "http://localhost:8080/roundplayer/register";
     name=''
     _users = [];
     _rounds = [];
@@ -31,6 +32,11 @@ class PlayerRoundsModel{
 
         }
         ).catch();
+    }
+
+    registerRound(id_round,id_user){
+        var params ={id_round:id_round,id_user:id_user}
+        Axios.post(this.urlregister,params)
     }
     get users(){
         console.log(this._users)

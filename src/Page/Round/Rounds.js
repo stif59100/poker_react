@@ -11,8 +11,10 @@ import { fontAwesome } from 'fontawesome';
 
 
 const Round = ({id_round, date_round, name_round }) => {
-   const handleClickRegister = () =>{
-
+   const handleClickRegister = (e) =>{
+///     console.log(e.target.getAttribute('data-round') );
+console.log(e.props);
+//PlayerRoundsModel.registerRound();
    }
     return (
         <tr >
@@ -27,8 +29,12 @@ const Round = ({id_round, date_round, name_round }) => {
             </td>
             <td class="actions-round col">
                 <button type="button" class="btn btn-grey-light" onClick={handleClickRegister}>
+                    <FontAwesomeIcon icon={["fas","registered"]} round={id_round}/>
+                    <span>S'inscrire</span>
+                    </button>
+                    <button type="button" class="btn btn-grey-light">
                     <FontAwesomeIcon icon={["fas","registered"]}/>
-                    <span>Register</span>
+                    <span>Gérer</span>
                     </button>
             </td>
         </tr>
