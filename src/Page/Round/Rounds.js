@@ -12,8 +12,8 @@ import { fontAwesome } from 'fontawesome';
 
 const Round = ({id_round, date_round, name_round }) => {
    const handleClickRegister = (e) =>{
-///     console.log(e.target.getAttribute('data-round') );
-console.log(e.props);
+console.log(e.target.getAttribute({'data-round'}) );
+console.log("je m'inscris");
 //PlayerRoundsModel.registerRound();
    }
     return (
