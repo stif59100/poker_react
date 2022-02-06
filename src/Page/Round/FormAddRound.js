@@ -1,7 +1,7 @@
 import { point } from "leaflet";
 import { useState } from "react";
 import RoundsModel from "../../Models/RoundsModel";
-const FormAddRounds = (props) => {
+const FormAddRound = (props) => {
     const [date, setDate] = useState();
     const [name, setName] = useState();
     const [open, setOpen] = useState(false);
@@ -107,9 +107,7 @@ const FormAddRounds = (props) => {
 (!props.Profils.rights[""])?
 <Redirect to="/errors/rights"/>
 :*/
-const AddRound = (props) => {
 
-    return <FormAddRounds setAddMode={props.setAddMode} />
+export default FormAddRound;
 
-}
-export default AddRound;
+//setAddMode={props.setAddMode} 

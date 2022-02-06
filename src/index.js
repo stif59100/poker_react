@@ -18,7 +18,7 @@ const Routes = () => {
   })
   return <Switch>
     {
-      Menus.Menus.map(
+      Menus.Menus(Profile.loggedIn).map(
         (route, index) =>
           <Route path={route.path} exact={route.exact} key={index}>
             <div className='row'>

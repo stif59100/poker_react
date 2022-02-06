@@ -31,17 +31,10 @@ const Menu = (props) => {
   )
 }
 const Links = (props) => {
-  console.log("je suis dans les props du links");
-  console.log(props.Profile.loggedIn);
-  return Menus.Menus.map(
+  return Menus.Menus(props.Profile.loggedIn).map(
     (route, index) => {
-      // condition pour savoir si l'utilisateur est logué 
      return (props.Profile.loggedIn)?
-         (route.displayLoggedIn )
-         //est logué
-         ?<LinksLogged route={route} index={index}></LinksLogged>
-         // n'est pas logué
-         :null
+         (route.displayLoggedIn )?<LinksLogged route={route} index={index} key={index}></LinksLogged>:null
       :(route.display)?<LinksNoLogged route={route} index={index} key={index} ></LinksNoLogged>:null
     }
   )

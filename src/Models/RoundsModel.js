@@ -15,7 +15,6 @@ class RoundsModel {
     fetchGetRounds(){
         Axios.get(this.urlGetRounds)
         .then((result)=>{
-            console.log(result.data);  
             this._rounds = result.data;
         }
         ).catch();
@@ -23,14 +22,12 @@ class RoundsModel {
     fetchAddRound(round){
             Axios.post(this.urlAddRound,round)
             .then((result)=>{
-                console.log(result.data);  
                 this._rounds = result.data;
             }
             ).catch();
     }
 
     get rounds(){
-        console.log(this._users)
         return this._rounds;
     }
 }

@@ -5,55 +5,38 @@ class PlayerRoundsModel{
     urlbyround = 'http://localhost:8080/roundByRoundId/';
     urlbyuser =  "http://localhost:8080/roundByUserId/";
     urlregister = "http://localhost:8080/roundplayer/register";
-    name=''
-    _users = [];
-    _rounds = [];
 
     constructor(){
         makeAutoObservable(this);
     }
     
-    fetchUsers(id_round){
-        Axios.get(this.urlbyround+id_round)
+    async fetchUsers(id_round){
+        return await Axios.get(this.urlbyround+id_round)
         .then((result)=>{
-            console.log(result.data);  
-            this.users = result.data;
-        }
-        ).catch();
+           return  result.data;
+        })
+        .then((users)=>{
+            return users;
+        }).catch();
     }
 
-    fetchRound(id_user){
-        Axios.get(this.urlbyuser+id_user)
+    async fetchRounds(id_user){
+        return await Axios.get(this.urlbyuser+id_user)
         .then((result)=>{
-            console.log("je suis dans fetch  round")
-            console.log(result.data); 
-            this.rounds = result.data;
-            console.log(this.rounds); 
-
-        }
-        ).catch();
+           return result.data;
+        })
+        .then((rounds)=>{
+            return rounds;
+        }).catch();
     }
-
-    registerRound(id_round,id_user){
+    async registerRound(id_round,id_user){
         var params ={id_round:id_round,id_user:id_user}
-        Axios.post(this.urlregister,params)
+        ;(await Axios.post(this.urlregister,params)).then((result)=>{
+            if(result.affectedRows == 1){
+
+            }
+        })
     }
-    get users(){
-        console.log(this._users)
-        return this._users;
-    }
-    set users(value){
-        this._users = value;
-    }
-    get rounds(){
-        console.log("je suis dans get round")
-        console.log(this._rounds)
-        return this._rounds;
-    }
-    set rounds(value){
-        console.log("setter rounds")
-        console.log(value)
-        this._rounds = value;
-    }
+    
 }
 export default new PlayerRoundsModel();

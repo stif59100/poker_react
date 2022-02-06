@@ -6,31 +6,8 @@ import Register from '../Page/Register/Register_class';
 import ResetPassword from '../Page/ResetPassword/ResetPassword';
 import Profile from '../Page/Profile/Profile';
 import ErrorsRights from '../Page/Errors/ErrorsRights';
-
+import LogOut from '../Page/Profile/LogOut';
 class Menus {
-
-  _activateMenuByRoute = [
-    {
-      route: "/",
-      menuName: "Home"
-    }, 
-    {
-      route: "/ResetPassword",
-      menuName: "Home"
-    },
-    , 
-    {
-      route: "/Register",
-      menuName: "Register"
-    },
-    , 
-    {
-      route: "/Round",
-      menuName: "Round"
-    }
-  ]
-
-
   _menus = [
     {
       path: '/',
@@ -39,7 +16,9 @@ class Menus {
       displayLoggedIn: true,
       component: Home,
       name: 'Home',
-      icon: ["fas", "home"]
+      icon: ["fas", "home"],
+      order: 1,
+      orderLoggedIn: 1
     },
     {
       path: '/ResetPassword',
@@ -56,7 +35,9 @@ class Menus {
       exact: true,
       component: Register,
       name: 'Register',
-      icon: ["fas", "trophy"]
+      icon: ["fas", "trophy"],
+      order: 4,
+      orderLoggedIn: 4
     },
 
     {
@@ -66,7 +47,9 @@ class Menus {
       display: true,
       component: Championship,
       name: 'Championnat',
-      icon: ["fas", "trophy"]
+      icon: ["fas", "trophy"],
+      order: 2,
+      orderLoggedIn: 2
     },
     {
       path: '/Authentication',
@@ -75,7 +58,8 @@ class Menus {
       display: true,
       component: Authentication,
       name: 'Authentification',
-      icon: ["fas", "sign-in-alt"]
+      icon: ["fas", "sign-in-alt"],
+      order: 3,
     },
     {
       path: '/Rounds',
@@ -84,7 +68,8 @@ class Menus {
       exact: true,
       component: Rounds,
       name: 'Rounds',
-      icon: ["fas", "trophy"]
+      icon: ["fas", "trophy"],
+      orderLoggedIn: 3
     },
     {
       path: '/Profile',
@@ -93,7 +78,8 @@ class Menus {
       exact: true,
       component: Profile,
       name: 'Profile',
-      icon: ["fas", "user"]
+      icon: ["fas", "user"],
+      orderLoggedIn: 4
     },
     {
       path: '/About',
@@ -101,7 +87,9 @@ class Menus {
       display: true,
       exact: true,
       component: Authentication,
-      name: 'A propos'
+      name: 'A propos',
+      order: 6,
+      orderLoggedIn: 6
     }
     ,
     {
@@ -110,13 +98,51 @@ class Menus {
       display: false,
       exact: true,
       component: ErrorsRights
+    },
+    {
+      path: '/Logout',
+      displayLoggedIn: true,
+      display: false,
+      exact: true,
+      component: LogOut,
+      icon: ["fas", "sign-out-alt"],
+      name: 'logout',
+      order: 5,
+      orderLoggedIn: 5
     }
   ];
   constructor() {
     console.log("constructor");
   }
-  get Menus() {
-    return this._menus;
+  Menus(loggedIn) {
+    var menu = [];
+    if (loggedIn) {
+      menu =  this._menus.sort(
+        (menu, menu1) => {
+          if (menu.orderLoggedIn < menu1.orderLoggedIn){
+            return -1;
+          }
+          else if (menu.orderLoggedIn > menu1.orderLoggedIn){
+            return 1;
+          }
+          else
+            return 0;
+        });
+    }
+    else {
+      menu = this._menus.sort(
+        (menu, menu1) => {
+          if (menu.order < menu1.order)
+            return -1;
+          else if (menu.order > menu1.order)
+            return 1;
+          else
+            return 0;
+        });
+    }
+    return menu;
   }
+
+
 }
 export default new Menus();
