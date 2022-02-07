@@ -10,43 +10,44 @@ import RoundsModel from "../../Models/RoundsModel";
 const RegisterOrUnRegister = observer((props) => {
     const rounds = toJS(Profile.user.rounds);
     return (
-        (rounds)?
-            rounds.some(round => round.id_round === props.id_round)?
-            <UnRegister id_round={props.id_round}/>
-            :<Register id_round={props.id_round}/>
+        (rounds) ?
+            rounds.some(round => round.id_round === props.id_round) ?
+                <UnRegister id_round={props.id_round} />
+                : <Register id_round={props.id_round} />
 
-        :null)
+            : null)
 })
 
 
-const Register = observer((props) =>{
+const Register = observer((props) => {
     const handleClickRegister = (e) => {
         console.log("Register");
-        PlayerRoundsModel.registerRound(props.id_round,Profile.user.id);      
+        PlayerRoundsModel.registerRound(props.id_round, Profile.user.id);
     }
     return (
         <button type="button" className="btn btn-grey-light" onClick={handleClickRegister}>
-        <FontAwesomeIcon icon={["fas", "registered"]} />
-        <span>S'inscrire</span>
-    </button>
+            <FontAwesomeIcon icon={["fas", "registered"]} />
+            <span>S'inscrire</span>
+        </button>
     )
 })
 
-const UnRegister = (props) =>{
+const UnRegister = (props) => {
 
-    const handleClickUnRegister = (e) => {   
-         console.log("UnRegister");
+    const handleClickUnRegister = (e) => {
+        console.log("UnRegister");
         PlayerRoundsModel.unRegisterRound(props.id_round, Profile.user.id);
     }
     return (
         <button type="button" className="btn btn-grey-light" onClick={handleClickUnRegister}>
-        <FontAwesomeIcon icon={["fas", "registered"]} />
-        <span>Se desincrire</span>
-    </button>
+            <FontAwesomeIcon icon={["fas", "registered"]} />
+            <span>Se desincrire</span>
+        </button>
     )
 }
-const Round = ({ id_round, date_round, name_round, EnableManagementMode }) => {
-    const [selection, setSelection] = useState([]);
+const Round = ({ id_round, date_round, hour_round, name_round, EnableManagementMode }) => {
+    
+     const [selection, setSelection] = useState([]);
 
     const HandleClickCheckox = (event) => {
         var lastValue = selection;
@@ -54,13 +55,18 @@ const Round = ({ id_round, date_round, name_round, EnableManagementMode }) => {
         lastValue.push(event.target.value);
         setSelection(lastValue)
     }
+    
     return (
+        
         <tr >
             <td >
                 <input className="form-check-input input-grey-light" type="checkbox" value={id_round} onClick={HandleClickCheckox} />
             </td>
-            <td className="selcect-round col">
+            <td className="select-round col">
                 <label className="text-gold-light">{date_round}</label>
+            </td>
+            <td className="select-round col">
+                <label className="text-gold-light">{hour_round}</label>
             </td>
             <td className="name-round col">
                 <label className='color-gold-light'>{name_round}</label>
@@ -69,7 +75,7 @@ const Round = ({ id_round, date_round, name_round, EnableManagementMode }) => {
                 <RegisterOrUnRegister id_round={id_round} />
 
                 <button type="button" className="btn btn-grey-light" onClick={EnableManagementMode}>
-                    <FontAwesomeIcon icon={["fas", "registered"]}  />
+                    <FontAwesomeIcon icon={["fas", "registered"]} />
                     <span>Gérer</span>
                 </button>
             </td>

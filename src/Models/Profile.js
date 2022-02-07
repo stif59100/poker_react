@@ -25,6 +25,7 @@ class Profile
                     console.log("error user emty fetch")
                     return;
                 }
+                console.log(user)
                 this._user.firstName = user.firstname_user;
                 this._user.lastName = user.name_user;
                 this._user.email = user.email_user;

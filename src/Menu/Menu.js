@@ -10,7 +10,8 @@ const Menu = (props) => {
   return (
    <div className="row menu">
       <div className="col-12  col-lg-3 offset-lg-1">
-        <img src={process.env.PUBLIC_URL + '/images/logo_small.png'} className="img-fluid" alt="test" />
+        <Link to={"/"}>
+        <img src={process.env.PUBLIC_URL + '/images/logo_small.png'} className="img-fluid" alt="test" /></Link>
       </div>
       <div className="col-12 col-lg-8">
         <navbar className="navbar navbar-expand-lg text-center navbar-light">

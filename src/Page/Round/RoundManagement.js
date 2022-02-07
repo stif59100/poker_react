@@ -14,7 +14,7 @@ const UserRegisterRound = () => {
 
 
 const UsersRegisterRound = () => {
-    console.log(PlayerRoundsModel.fetchUsers())
+   // console.log(PlayerRoundsModel.fetchUsers())
     return (
         /*PlayerRoundsModel.fetchUsers().map((user, key) =>
             <UserRegisterRound {...user} key={key} />

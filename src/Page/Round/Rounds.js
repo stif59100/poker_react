@@ -18,6 +18,7 @@ const RoundList = observer((props) => {
 
 
 const AddRound = observer((props) => {
+    console.log(toJS(Profile.user.rights))
     const rights = toJS(Profile.user.rights);
     return (
         (rights) ?
@@ -66,6 +67,9 @@ const ReadModeRounds = (props) =>
                             <th scope="col">
                                 <FontAwesomeIcon icon={["far", "calendar"]}></FontAwesomeIcon>
                                 <span className='color-gold-light'>Date</span>
+                            </th>
+                            <th scope="col">
+                                <span className='color-gold-light'>Heure</span>
                             </th>
                             <th scope="col">
                                 <span className='color-gold-light'>name</span>

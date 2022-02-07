@@ -3,6 +3,7 @@ import { useState } from "react";
 import RoundsModel from "../../Models/RoundsModel";
 const FormAddRound = (props) => {
     const [date, setDate] = useState();
+    const [hour, setHour] = useState();
     const [name, setName] = useState();
     const [open, setOpen] = useState(false);
     const [points_attributs, setPointAttributs] = useState();
@@ -11,8 +12,13 @@ const FormAddRound = (props) => {
     const [rake, setRake] = useState();
     const [stack, setStack] = useState();
     const [addon, setAddon] = useState();
+    const [rebuy, setRebuy] = useState();
+    const [bounty, setBounty] = useState();
     const changeDate = (event) => {
         setDate(event.target.value)
+    }
+    const changeHour = (event) => {
+        setHour(event.target.value)
     }
 
     const changeName = (event) => {
@@ -40,12 +46,18 @@ const FormAddRound = (props) => {
     const changeAddon= (event) => {
         setAddon(event.target.value)
     }
+    const changeRebuy= (event) => {
+        setRebuy(event.target.value)
+    }
+    const changeBounty= (event) => {
+        setBounty(event.target.value)
+    }
     const handleSubmitAddRound = (event) => {
 
         event.preventDefault();
         console.log(props)
         props.setAddMode(false);
-        var round = { name: name, date: date, open: open, points_attributs: points_attributs, maxPlayer: maxPlayer,buyIn: buyIn, rake: rake,stack:stack, addon: addon }
+        var round = { name: name, date: date,hour: hour, open: open, points_attributs: points_attributs, maxPlayer: maxPlayer,buyIn: buyIn, rake: rake,stack:stack, addon: addon, rebuy:rebuy, bounty: bounty }
         RoundsModel.fetchAddRound(round);
 
     }
@@ -58,6 +70,8 @@ const FormAddRound = (props) => {
                     <div className="form-group">
                         <label for="InputDate" className="color-gold-light">Date</label>
                         <input type="date" className="form-control input-grey-light" id="InputDate" aria-describedby="dateHelp" placeholder="Enter date" onChange={changeDate} />
+                        <label for="InputHour" className="color-gold-light">Heure</label>
+                        <input type="time" className="form-control input-grey-light" id="InputHour" aria-describedby="HourHelp" placeholder="Enter Time" onChange={changeHour} />
                         
                     </div>
 
@@ -90,6 +104,14 @@ const FormAddRound = (props) => {
                     <div className="form-group">
                         <label for="InputAddon" className="color-gold-light">Addon</label>
                         <input type="number" className="form-control input-grey-light" id="InputAddon" aria-describedby="nameHelp" placeholder="Saisissez le montant de l'addon ou rebuy" onChange={changeAddon} />
+                    </div>
+                    <div className="form-group">
+                        <label for="InputRebuy" className="color-gold-light">Rebuy</label>
+                        <input type="number" className="form-control input-grey-light" id="InputAddon" aria-describedby="nameHelp" placeholder="Saisissez le montant du rebuy" onChange={changeRebuy} />
+                    </div>
+                    <div className="form-group">
+                        <label for="InputBounty" className="color-gold-light">Bounty</label>
+                        <input type="number" className="form-control input-grey-light" id="InputBounty" aria-describedby="nameHelp" placeholder="Saisissez le montant du bounty" onChange={changeBounty} />
                     </div>
                     <div className="form-check">
                         <label className="form-check-label color-gold-light" for="checkOpen">Check is open register</label>
