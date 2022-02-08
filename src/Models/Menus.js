@@ -15,7 +15,7 @@ class Menus {
       display: true,
       displayLoggedIn: true,
       component: Home,
-      name: 'Home',
+      name: 'Accueil',
       icon: ["fas", "home"],
       order: 1,
       orderLoggedIn: 1
@@ -34,7 +34,7 @@ class Menus {
       displayLoggedIn: false,
       exact: true,
       component: Register,
-      name: 'Register',
+      name: "S'inscrire",
       icon: ["fas", "trophy"],
       order: 4,
       orderLoggedIn: 4
@@ -67,7 +67,7 @@ class Menus {
       displayLoggedIn: true,
       exact: true,
       component: Rounds,
-      name: 'Rounds',
+      name: 'Parties',
       icon: ["fas", "trophy"],
       orderLoggedIn: 3
     },
@@ -77,7 +77,7 @@ class Menus {
       displayLoggedIn: true,
       exact: true,
       component: Profile,
-      name: 'Profile',
+      name: 'Mon profil',
       icon: ["fas", "user"],
       orderLoggedIn: 4
     },
@@ -106,7 +106,7 @@ class Menus {
       exact: true,
       component: LogOut,
       icon: ["fas", "sign-out-alt"],
-      name: 'logout',
+      name: 'Se déconnecter',
       order: 5,
       orderLoggedIn: 5
     }
