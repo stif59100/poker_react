@@ -5,6 +5,7 @@ class PlayerRoundsModel{
     urlbyround = 'http://localhost:8080/roundByRoundId/';
     urlbyuser =  "http://localhost:8080/roundByUserId/";
     urlregister = "http://localhost:8080/roundplayer/register";
+    urlunregister = "http://localhost:8080/roundplayer/unRegister";
 
     constructor(){
         makeAutoObservable(this);
@@ -24,17 +25,23 @@ class PlayerRoundsModel{
         return await Axios.get(this.urlbyuser+id_user)
         .then((result)=>{
            return result.data;
-        })
-        .then((rounds)=>{
-            return rounds;
         }).catch();
     }
     async registerRound(id_round,id_user){
-        var params ={id_round:id_round,id_user:id_user}
-        ;(await Axios.post(this.urlregister,params)).then((result)=>{
+        var params ={id_round:id_round,id_user:id_user};
+        await Axios.post(this.urlregister,params).then((result)=>{
             if(result.affectedRows == 1){
 
             }
+        })
+    }
+
+    async unRegisterRound(id_round,id_user){
+        var params ={id_round:id_round,id_user:id_user};
+        await Axios.delete(this.urlunregister, { data : params}).then((result)=>{
+            if(result.affectedRows == 1){
+            }
+     
         })
     }
     

@@ -54,7 +54,7 @@ const Forms = observer((props) => {
           </div>
           <div className="form-group">
             <label htmlFor="inputPassword" className="w-100 text-left color-gold-light" id='mdp'>Mot de passe</label>
-            {(passwordIsVisible)?
+            {(!passwordIsVisible)?
             <input className="form-control input-grey-light" id="InputNotVisible" type="password" required placeholder="Votre mot de passe" onChange={onPassword} value={password} />
             :
             <input className="form-control input-grey-light" id="inputVisible" type="text" required placeholder="Votre mot de passe" onChange={onPassword} value={password} />}

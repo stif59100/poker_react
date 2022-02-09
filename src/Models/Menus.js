@@ -7,6 +7,10 @@ import ResetPassword from '../Page/ResetPassword/ResetPassword';
 import Profile from '../Page/Profile/Profile';
 import ErrorsRights from '../Page/Errors/ErrorsRights';
 import LogOut from '../Page/Profile/LogOut';
+import FormAddRound from '../Page/Round/FormAddRound';
+import RoundManagement from '../Page/Round/RoundManagement';
+
+
 class Menus {
   _menus = [
     {
@@ -19,6 +23,29 @@ class Menus {
       icon: ["fas", "home"],
       order: 1,
       orderLoggedIn: 1
+    },
+    {
+      path: '/Round/Add',
+      exact: true,
+      display: false,
+      displayLoggedIn: false,
+      component: FormAddRound,
+      name: 'RoundAdd',
+      icon: ["fas", "trophy"],
+      order: 0,
+      orderLoggedIn: 0
+    },
+    
+    {
+      path: '/RoundManagement/:id',
+      exact: true,
+      display: false,
+      displayLoggedIn: false,
+      component: RoundManagement,
+      name: 'RoundManagement',
+      icon: ["fas", "trophy"],
+      order: 0,
+      orderLoggedIn: 0
     },
     {
       path: '/ResetPassword',

@@ -1,4 +1,3 @@
-
 const Home = () => {
   return (
     <section className="col-12 home" >
