@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { observer } from 'mobx-react-lite';
 var resultText = ""
 
+// création de la classe d'inscription d'un utilisateur
 class InscriptionPlayer extends React.Component{
   constructor(props) {
     super(props)
@@ -30,7 +31,9 @@ class InscriptionPlayer extends React.Component{
 } /// handleChange
   handleSubmit = (event) => {
     event.preventDefault();
+    // url d'accès à la base de données
     let url = "http://localhost:8080/inscription"
+// paramètres de la table user
     url += "nom_utilisateur" + this.state.nom_utilisateur
     url += "prenom_utilisateur" + this.state.prenom_utilisateur
     url += "pseudo_utilisateur" + this.state.prenom_utilisateur

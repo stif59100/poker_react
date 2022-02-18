@@ -1,31 +1,34 @@
 import PlayerRoundsModel from "../../Models/PlayerRoundsModel";
+import { useLocation,useParams } from 'react-router-dom'
 
-const UserRegisterRound = () => {
+
+const UserRound = ({name_user}) => {
     return (
 
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>{name_user}</td>
+            <td>{name_user}</td>
+            <td>{name_user}</td>
         </tr>
     )
 }
 
 
-const UsersRegisterRound = () => {
+const UsersRegisterRound = (props) => {
    // console.log(PlayerRoundsModel.fetchUsers())
-    return (
-        /*PlayerRoundsModel.fetchUsers().map((user, key) =>
-            <UserRegisterRound {...user} key={key} />
-        )*/ null
-    )
-
+   let rounds = PlayerRoundsModel.fetchUsers(props.Id_Round).then((data)=>{return data});
+   console.log(rounds)
+  return  null //rounds.map((user, key) => <UserRound {...user} key={key} />)
+     
 }
 
 
-const RoundManagement = (props) => {
+    //return null
 
+
+const RoundManagement = (props) => {
+  const params = useParams()
+  console.log(params)
     return (
 
         < div className="col-12 p-5">
@@ -33,25 +36,25 @@ const RoundManagement = (props) => {
             <div className="row">
                 <div className="col-12">
                     <h1>Informations</h1>
-                    <label>Name</label>
-                    <label>Max Player</label>
+                    <label>Nom de la manche</label>
+                    <label>Date</label>
                 </div>
             </div>
             <div className="row">
                 <div className="col-12">
-                    <h1>Users</h1>
+                    <h1>Joueurs inscrits</h1>
 
                     <table className="table">
                         <thead className="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Pseudo</th>
                                 <th scope="col">Handle</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <UsersRegisterRound Round={props.Round} />
+                            <UsersRegisterRound Id_Round={params.id} />
                         </tbody>
                     </table>
                 </div>

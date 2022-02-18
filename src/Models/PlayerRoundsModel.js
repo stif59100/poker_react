@@ -8,17 +8,18 @@ class PlayerRoundsModel{
     urlunregister = "http://localhost:8080/roundplayer/unRegister";
 
     constructor(){
+        // fonctionnalité d'observation si maj les components se mettent à jour grâce à cette fonctionnalité
         makeAutoObservable(this);
     }
     
+    // requête asynchrone permettant de récupérer les infos de la bdd côté back end node js
     async fetchUsers(id_round){
+        console.log(id_round)
         return await Axios.get(this.urlbyround+id_round)
         .then((result)=>{
            return  result.data;
         })
-        .then((users)=>{
-            return users;
-        }).catch();
+        .catch();
     }
 
     async fetchRounds(id_user){

@@ -12,12 +12,23 @@ class Register extends React.Component {
       firstname_user: this.props.firstname_user,
       pseudo_user: this.props.pseudo_user,
       email_user: this.props.email_user,
-      password_user: this.props.password_user
+      password_user: this.props.password_user,
+      confirmPasswordUser: this.props.confirmPasswordUser,
+      passwdIsVisible: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleVisiblePasswd = this.handleVisiblePasswd.bind(this)
+    
   }
-
+  
+  handleVisiblePasswd(){
+    console.log('ca marche')
+    this.setState({
+      passwdIsVisible: !this.state.passwdIsVisible/// Pour faire du générique
+    })
+    console.log(this.state.passwdIsVisible)
+  }
   handleChange(event) {
     console.clear()
     const name = event.target.name
@@ -77,6 +88,9 @@ class Register extends React.Component {
       )
 
   };
+  componentDidMount(){
+    console.log(this.passwdIsVisible)
+  }
   render() {
     return (
       <section className="row register">
@@ -97,12 +111,22 @@ class Register extends React.Component {
             <div className="form-group">
               <label className="w-100 text-left color-gold-light">Votre adresse email</label>
               <input name="email_user" className="form-control input-grey-light" type="text" placeholder="Saisissez votre email" value={this.email_user} onChange={this.handleChange.bind(this)} />
-              <input className="form-control input-grey-light" type="text" placeholder="Confirmez votre email" />
+              <input className="form-control input-grey-light" type="text" placeholder="Confirmez votre email" value={this.confirmPasswordUser} onChange={this.handleChangeConfirmPassword} />
             </div>
             <div className="form-group">
               <label className="w-100 text-left color-gold-light">Mot de passe</label>
+              {(!this.passwdIsVisible)?
+              <div>
               <input name="password_user" className="form-control input-grey-light" type="password" placeholder="Saisissez votre mot de passe" onChange={this.handleChange.bind(this)} value={this.password_user} />
-              <input className="form-control input-grey-light" type="password" placeholder="Confirmez votre mot de passe" />
+              <input className="form-control input-grey-light" type="password" placeholder="Confirmez votre mot de passe" value={this.confirmPasswordUser} onChange={this.handleChange.bind(this)}/>
+              </div>
+              : <div>
+                <input className="form-control input-grey-light" id="inputVisible" type="text" required placeholder="Votre mot de passe" onChange={this.handleChange.bind(this)} value={this.password_user} />
+              <input className="form-control input-grey-light" id="inputVisible" type="text" required placeholder="Votre mot de passe" value={this.confirmPasswordUser} onChange={this.handleChange.bind(this)} />
+              </div>}
+              <label for="chkVisibility" id='lblVisible'>Mot de passe visible</label>
+            <input type="checkbox" id='chkVisibilite' onChange={this.handleVisiblePasswd.bind(this)} />
+            <br></br>
             </div>
             <button type="submit" className="btn btn-gold-light" >valider</button>
           </form>

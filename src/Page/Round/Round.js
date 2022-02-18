@@ -3,10 +3,14 @@ import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toJS } from 'mobx';
 
+
 import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
 import Profile from '../../Models/Profile';
 import RoundsModel from "../../Models/RoundsModel";
 import { Link } from 'react-router-dom';
+import { dom } from '@fortawesome/fontawesome-svg-core';
+import { formatRelativeTime } from '@formatjs/intl';
+import { Router } from 'react-router';
 
 const RegisterOrUnRegister = observer((props) => {
     const rounds = toJS(Profile.user.rounds);
@@ -24,9 +28,10 @@ const Register = observer((props) => {
     const handleClickRegister = (e) => {
         console.log("Register");
         PlayerRoundsModel.registerRound(props.id_round, Profile.user.id);
+        
     }
     return (
-        <button type="button" className="btn btn-grey-light" onClick={handleClickRegister}>
+        <button type="button" className="btn btn-grey-light" onClick={handleClickRegister} href="/Rounds">
             <FontAwesomeIcon icon={["fas", "registered"]} />
             <span>S'inscrire</span>
         </button>
@@ -34,12 +39,16 @@ const Register = observer((props) => {
 })
 
 const UnRegister = (props) => {
-
+    
     const handleClickUnRegister = (e) => {
         console.log("UnRegister");
         PlayerRoundsModel.unRegisterRound(props.id_round, Profile.user.id);
+        
     }
+    
+    
     return (
+        
         <button type="button" className="btn btn-grey-light" onClick={handleClickUnRegister}>
             <FontAwesomeIcon icon={["fas", "registered"]} />
             <span>Se desincrire</span>
@@ -52,6 +61,7 @@ const Round = ({ id_round, date_round,hour_round,name_round }) => {
         var id_round = event.target.value;
         DeleteRounds.push(id_round);
         setDeleteRounds(DeleteRounds);
+        
         console.log(DeleteRounds)
     }
     return (

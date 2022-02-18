@@ -14,9 +14,12 @@ import RoundManagement from '../Page/Round/RoundManagement';
 class Menus {
   _menus = [
     {
+      //path est l'url à laquelle on accède
       path: '/',
+      // on indique qu'on voudra bien cette route là
       exact: true,
       display: true,
+      // page visible dans le menu une fois logué
       displayLoggedIn: true,
       component: Home,
       name: 'Accueil',
@@ -28,6 +31,7 @@ class Menus {
       path: '/Round/Add',
       exact: true,
       display: false,
+      // non visible dans le menu si l'utilisateur n'est pas identifié true = visible false = non visible 
       displayLoggedIn: false,
       component: FormAddRound,
       name: 'RoundAdd',
@@ -75,6 +79,7 @@ class Menus {
       component: Championship,
       name: 'Championnat',
       icon: ["fas", "trophy"],
+      // order == ordre d'affichage
       order: 2,
       orderLoggedIn: 2
     },
@@ -94,7 +99,7 @@ class Menus {
       displayLoggedIn: true,
       exact: true,
       component: Rounds,
-      name: 'Parties',
+      name: 'Tournois',
       icon: ["fas", "trophy"],
       orderLoggedIn: 3
     },
@@ -144,7 +149,10 @@ class Menus {
   Menus(loggedIn) {
     var menu = [];
     if (loggedIn) {
+      
       menu =  this._menus.sort(
+        // comparaison de la valeur actuelle avec la précédente valeur
+        // menu valeur actuelle menu1 valeur suivante
         (menu, menu1) => {
           if (menu.orderLoggedIn < menu1.orderLoggedIn){
             return -1;

@@ -41,6 +41,7 @@ class Profile
             });
     }
     async getCurrentUser(){
+        // on stock en json les informations de la requêtes on désérialise la requête
         var user =  JSON.parse(localStorage.getItem("user"));
         if(user){
             this._user.firstName = user.firstName;

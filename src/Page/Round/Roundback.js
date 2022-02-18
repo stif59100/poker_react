@@ -40,10 +40,14 @@ const UnRegister = (props) => {
         PlayerRoundsModel.unRegisterRound(props.id_round, Profile.user.id);
     }
     return (
+        
+        <Link to={{
+            pathname:  `/Rounds`
+          }}>
         <button type="button" className="btn btn-grey-light" onClick={handleClickUnRegister}>
             <FontAwesomeIcon icon={["fas", "registered"]} />
             <span>Se desincrire</span>
-        </button>
+        </button></Link>
     )
 }
 const Round = ({ id_round, date_round,hour_round,name_round }) => {
