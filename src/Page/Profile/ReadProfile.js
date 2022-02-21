@@ -18,7 +18,7 @@ const ReadMode = observer((props) => {
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <strong>Information</strong>
+                                    <strong>Informations</strong>
                                 </div>
                             </div>
                             <div className="row">
@@ -29,22 +29,22 @@ const ReadMode = observer((props) => {
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-user  "></span>
-                                                        Name
+                                                        Nom
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.firstName}
+                                                    {props.Profile.lastName}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-cloud "></span>
-                                                        Lastname
+                                                        Prénom
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.lastName}
+                                                    {props.Profile.firstname}
                                                 </td>
                                             </tr>
 
@@ -52,7 +52,7 @@ const ReadMode = observer((props) => {
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-bookmark "></span>
-                                                        Username
+                                                        Pseudo
                                                     </strong>
                                                 </td>
                                                 <td className="">

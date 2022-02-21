@@ -26,22 +26,22 @@ const EditMode = (props) => {
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-user  "></span>
-                                                        Name
+                                                        Nom
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.firstName}></input>
+                                                    <input type="text" value={props.Profile.lastName}></input>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-cloud "></span>
-                                                        Lastname
+                                                        Prénom
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.lastName}></input>
+                                                    <input type="text" value={props.Profile.firstName}></input>
                                                 </td>
                                             </tr>
 
