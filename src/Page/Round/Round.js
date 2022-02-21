@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toJS } from 'mobx';
-
-
+import { Link } from 'react-router-dom';
 import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
 import Profile from '../../Models/Profile';
 import RoundsModel from "../../Models/RoundsModel";
-import { Link } from 'react-router-dom';
-import { dom } from '@fortawesome/fontawesome-svg-core';
-import { formatRelativeTime } from '@formatjs/intl';
-import { Router } from 'react-router';
 
-const RegisterOrUnRegister = observer((props) => {
-    const rounds = toJS(Profile.user.rounds);
+
+const RegisterOrUnRegister = (props) => {
+    
+    const rounds = PlayerRoundsModel.RoundByUser;
     return (
         (rounds) ?
             rounds.some(round => round.id_round === props.id_round) ?
@@ -21,14 +17,14 @@ const RegisterOrUnRegister = observer((props) => {
                 : <Register id_round={props.id_round} />
 
             : null)
-})
+}
 
 
-const Register = observer((props) => {
-    const handleClickRegister = (e) => {
-        console.log("Register");
-        PlayerRoundsModel.registerRound(props.id_round, Profile.user.id);
-        
+const Register = (props) => {
+    const handleClickRegister = async (e) => {
+        await PlayerRoundsModel.registerRound(props.id_round, Profile.user.id);
+        await PlayerRoundsModel.fetchRounds(Profile.user.id)
+        await RoundsModel.fetchGetRounds()  
     }
     return (
         <button type="button" className="btn btn-grey-light" onClick={handleClickRegister} href="/Rounds">
@@ -36,19 +32,17 @@ const Register = observer((props) => {
             <span>S'inscrire</span>
         </button>
     )
-})
+}
 
 const UnRegister = (props) => {
     
-    const handleClickUnRegister = (e) => {
-        console.log("UnRegister");
-        PlayerRoundsModel.unRegisterRound(props.id_round, Profile.user.id);
-        
+    const  handleClickUnRegister =async (e) => {
+        await PlayerRoundsModel.unRegisterRound(props.id_round, Profile.user.id);
+        await PlayerRoundsModel.fetchRounds(Profile.user.id)
+        await RoundsModel.fetchGetRounds()  
     }
     
-    
     return (
-        
         <button type="button" className="btn btn-grey-light" onClick={handleClickUnRegister}>
             <FontAwesomeIcon icon={["fas", "registered"]} />
             <span>Se desincrire</span>
@@ -57,12 +51,11 @@ const UnRegister = (props) => {
 }
 const Round = ({ id_round, date_round,hour_round,name_round }) => {
     const [DeleteRounds, setDeleteRounds] = useState([])
+    
     const HandleClickCheckox = (event) => {
         var id_round = event.target.value;
         DeleteRounds.push(id_round);
         setDeleteRounds(DeleteRounds);
-        
-        console.log(DeleteRounds)
     }
     return (
         

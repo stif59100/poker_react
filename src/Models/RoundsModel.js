@@ -1,11 +1,7 @@
-import Axios from "axios";
 import {makeAutoObservable} from 'mobx';
-import { element } from "prop-types";
-
+import Axios from "axios";
+import BackEndRequest from './BackEndRequest';
 class RoundsModel {
-    urlGetRounds = 'http://localhost:8080/rounds';
-    urlAddRound = 'http://localhost:8080/round/add';
-    name=''
     _rounds = [];
 
     constructor(){ 
@@ -13,8 +9,10 @@ class RoundsModel {
         makeAutoObservable(this);
     }
     
-    fetchGetRounds(){
-        Axios.get(this.urlGetRounds)
+    async fetchGetRounds(){
+        this._rounds = [];
+        console.log(" je suis dnas le fecth rounds")
+        await Axios.get(BackEndRequest.GetRounds)
         .then((result)=>{
             //this._rounds = result.data;
             result.data.forEach(element =>{
@@ -24,8 +22,8 @@ class RoundsModel {
         }
         ).catch();
     }
-    fetchAddRound(round){
-            Axios.post(this.urlAddRound,round)
+    async fetchAddRound(round){
+        await Axios.post(BackEndRequest.AddRound,round)
             .then((result)=>{
                 this._rounds = result.data;
             }

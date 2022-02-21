@@ -2,7 +2,7 @@ import Home from '../Page/Home/Home';
 import Authentication from '../Page/Authentication/Authentication';
 import Championship from '../Page/Championship/Championship';
 import Rounds from '../Page/Round/Rounds';
-import Register from '../Page/Register/Register_class';
+import Register from '../Page/Register/Register';
 import ResetPassword from '../Page/ResetPassword/ResetPassword';
 import Profile from '../Page/Profile/Profile';
 import ErrorsRights from '../Page/Errors/ErrorsRights';

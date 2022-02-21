@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import Menus from '../Models/Menus';
+import Menus from '../../Models/Menus';
 import { useLocation } from 'react-router-dom'
 import React, { useState } from 'react';
 

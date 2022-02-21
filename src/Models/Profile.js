@@ -3,9 +3,9 @@ import { makeAutoObservable } from 'mobx';
 import  sha256  from "sha256";
 import  Rights  from "./Rights";
 import PlayerRoundsModel from "./PlayerRoundsModel";
+import BackEndRequest from './BackEndRequest';
 class Profile 
 {
-    _urlAuthentication = 'http://localhost:8080/authentication';
     _user = {}
     _loggedIn = false;
 
@@ -17,7 +17,8 @@ class Profile
     fetchGetProfile(emailOrLogin, password) {
         var passwordHash = sha256(password);
         var userBeforeAuth = { emailOrLogin: emailOrLogin, password: passwordHash }
-        Axios.post(this._urlAuthentication, userBeforeAuth)
+        console.log(BackEndRequest)
+        Axios.post(BackEndRequest.Authentication, userBeforeAuth)
             .then((response) => {
                 return response.data
             }).then((user)=>{
@@ -25,13 +26,13 @@ class Profile
                     console.log("error user emty fetch")
                     return;
                 }
-                console.log(user)
+            
                 this._user.firstName = user.firstname_user;
                 this._user.lastName = user.name_user;
                 this._user.email = user.email_user;
                 this._user.id =  user.id_user;
-
-                this._loggedIn = true;      
+                this._user.pseudo = user.pseudo_user;
+                this._loggedIn = true;  
                 localStorage.setItem("user", JSON.stringify(this._user));
                 this._user.rights = Rights.getRights(this._user.id)
                 this._user.rounds = PlayerRoundsModel.fetchRound(this._user.id)
@@ -49,9 +50,10 @@ class Profile
             this._user.email = user.email;
             this._user.rights = user.rights;
             this._user.id =  user.id;
+            this._user.pseudo = user.pseudo;
             this._loggedIn=true;
-            this._user.rights = await Rights.fetchGetRights(this._user.id);
-            this._user.rounds = await PlayerRoundsModel.fetchRounds(this._user.id)
+            await PlayerRoundsModel.fetchRounds(this._user.id)
+            this._user.rights =  await Rights.fetchGetRights(this._user.id);
         }
     };
     LogOut(){

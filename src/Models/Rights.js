@@ -1,15 +1,14 @@
 import Axios from "axios";
 import { makeAutoObservable } from 'mobx';
-
+import BackEndRequest from './BackEndRequest';
 class Rights
 {
-    _urlRights = 'http://localhost:8080/rightsByUsers';
     constructor() {
         makeAutoObservable(this);     
     }
     async fetchGetRights(user_id){
         var data = {id_user:user_id};
-        return await Axios.post(this._urlRights,data)
+        return await Axios.post(BackEndRequest.Rights,data)
         .then((response) => {
             return  response.data
         })
