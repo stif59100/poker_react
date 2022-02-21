@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 
 const ReadMode = observer((props) => {
-    console.log(props.Profile)
     return (
         <section>
             <div className="container bootstrap snippets bootdey color-gold-light">
@@ -33,7 +32,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.lastName}
+                                                    {props.Profile.user.lastName}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -44,7 +43,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.firstname}
+                                                    {props.Profile.user.firstname}
                                                 </td>
                                             </tr>
 
@@ -56,7 +55,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.pseudo}
+                                                    {props.Profile.user.pseudo}
                                                 </td>
                                             </tr>
 
@@ -80,7 +79,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.email}
+                                                    {props.Profile.user.email}
                                                 </td>
                                             </tr>
                                             <tr>

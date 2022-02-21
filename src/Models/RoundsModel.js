@@ -18,14 +18,13 @@ class RoundsModel {
             result.data.forEach(element =>{
              this._rounds.push(this.daoToDto(element))   
             });
-            console.log(this._rounds)
         }
         ).catch();
     }
     async fetchAddRound(round){
         await Axios.post(BackEndRequest.AddRound,round)
             .then((result)=>{
-                this._rounds = result.data;
+                this._rounds.push(this.daoToDto(result.data))  
             }
             ).catch();
     }

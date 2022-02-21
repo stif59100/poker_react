@@ -12,8 +12,8 @@ const Profile = (props) => {
     return (
         (props.Profile.loggedIn) ?
             (editMode) ?
-                <EditMode Profile={props.Profile.user} HandleEditMode={HandleEditMode}></EditMode> :
-                <ReadMode Profile={props.Profile.user} HandleEditMode={HandleEditMode}></ReadMode>
+                <EditMode {...props} ></EditMode> :
+                <ReadMode {...props} HandleEditMode={HandleEditMode}></ReadMode>
             : <Redirect to="/"></Redirect>
     )
 };

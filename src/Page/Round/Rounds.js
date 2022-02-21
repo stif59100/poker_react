@@ -2,7 +2,6 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import Profile from '../../Models/Profile';
 import RoundsModel from "../../Models/RoundsModel";
 import Round from "./Round";
 import { Link } from 'react-router-dom';
@@ -10,12 +9,12 @@ import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
 
 const RoundList = observer((props) => {
     return RoundsModel.rounds.map(
-        (round, index) => <Round {...round}  key={index} />)
+        (round, index) => <Round {...round} {...props}  key={index} />)
 })
 
 
 const AddRound = (props) => {
-    const rights = Profile.user.rights;
+    const rights = props.Profile.user.rights;
     return (
         (rights) ?
             rights.some((right) => right.name_right === "add_round") ?
@@ -30,7 +29,7 @@ const AddRound = (props) => {
     )
 }
 const DeleteRound = (props) => {
-    const rights = Profile.user.rights;
+    const rights =  props.Profile.user.rights;
     return (
         (rights) ?
             rights.some((right) => right.name_right === "delete_round") ?           
@@ -44,14 +43,14 @@ const DeleteRound = (props) => {
 }
 
 const ReadModeRounds = observer((props) =>{
-    PlayerRoundsModel.fetchRounds(Profile.user.id)
+    PlayerRoundsModel.fetchRounds(props.Profile.user.id)
 return (
     <section className="col-12 round p-5">
         <div className="row">
             <div className="col-12 col-lg-10 offset-lg-1">
                 <div className="action-round d-flex justify-content-end">
-                    <AddRound />
-                    <DeleteRound EnableDeleteMode={props.EnableDeleteMode} />
+                    <AddRound {...props} />
+                    <DeleteRound {...props}  EnableDeleteMode={props.EnableDeleteMode} />
                 </div>
             </div>
         </div>
@@ -80,7 +79,7 @@ return (
                         </tr>
                     </thead>
                     <tbody>
-                        <RoundList/>
+                        <RoundList {...props} />
                     </tbody>
                 </table>
             </div>
@@ -95,7 +94,7 @@ const Rounds = (props) => {
         // inaccessible si n'est pas logué
         (!props.Profile.loggedIn) ?
             <Redirect to="/"></Redirect> :
-            <ReadModeRounds />
+            <ReadModeRounds {...props}  />
     )
 
 }
