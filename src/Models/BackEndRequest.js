@@ -6,6 +6,9 @@ class BackEndRequest {
     get GetRounds() {
         return this._baseUrl + '/rounds';
     }
+    get deleteRound(){
+        return this._baseUrl + '/round/deleteRound'
+    }
     get AddRound() {
         return this._baseUrl + '/round/add';
     }

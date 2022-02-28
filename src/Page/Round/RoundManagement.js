@@ -18,7 +18,7 @@ const UserRound = ({ name_user }) => {
 const UsersRegisterRound =  (props) => {
     PlayerByRoundModel.fetchUsers(props.Id_Round);
 
-    // Boucle sur la liste des utilisateurs inscrit dans la mange
+    // Boucle sur la liste des utilisateurs inscrit dans la manche
     return PlayerByRoundModel.UserByRound.map((user, key) => <UserRound {...user} key={key} />)
 
 }
@@ -90,6 +90,105 @@ const RoundManagement =  (props) => {
                                         </td>
                                         <td className="">
                                         <input type="text" value={round.max_player}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Points attribués
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.points_attributs}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Ouverte
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.open}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Fermeture
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.close}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Buy-in
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.buy_in}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Rake
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.rake}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Stack
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.stack}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Addon
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.addon}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Rebuy
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.rebuy}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span className="glyphicon glyphicon-eye-open "></span>
+                                                Bounty
+                                            </strong>
+                                        </td>
+                                        <td className="">
+                                        <input type="text" value={round.bounty}></input>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -33,10 +33,12 @@ const DeleteRound = (props) => {
     return (
         (rights) ?
             rights.some((right) => right.name_right === "delete_round") ?           
+            <Link to="/Round/Delete">
                     <button type='button' className="btn btn-gold-light" onClick={props.EnableDeleteMode}>
                         <FontAwesomeIcon icon={['fas', 'trash-alt']} />
                         <span> Supprimer</span>
                     </button>
+                    </Link>
                 : null
             : null
     )
