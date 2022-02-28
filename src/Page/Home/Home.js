@@ -1,3 +1,4 @@
+// Corps de la page d'acceuil.
 const Home = () => {
   return (
     <section className="col-12 home" >

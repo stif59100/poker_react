@@ -1,3 +1,5 @@
+// Class permettant de referencer toutes les urls appeler vers le back end.
+
 class BackEndRequest {
     _baseUrl = "http://localhost:8080";
     get Authentication() {
@@ -6,7 +8,7 @@ class BackEndRequest {
     get GetRounds() {
         return this._baseUrl + '/rounds';
     }
-    get deleteRound(){
+    get DeleteRound(){
         return this._baseUrl + '/round/deleteRound'
     }
     get AddRound() {

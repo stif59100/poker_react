@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import Menus from '../../Models/Menus';
+import MenusModel from '../../Models/MenusModel';
 import { useLocation } from 'react-router-dom'
 import React, { useState } from 'react';
 
+// Creation du menu global
 const Menu = (props) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
@@ -31,8 +32,10 @@ const Menu = (props) => {
 
   )
 }
+// boucle sur le model menu permettant afficher le bon composant en fonction de la route.
+// et également en fonction de l'utilisateur connecte oun on et de ces droits.
 const Links = (props) => {
-  return Menus.Menus(props.Profile.loggedIn).map(
+  return MenusModel.Menus(props.Profile.loggedIn).map(
     (route, index) => {
      return (props.Profile.loggedIn)?
          (route.displayLoggedIn )?<LinksLogged route={route} index={index} key={index}></LinksLogged>:null
@@ -40,6 +43,9 @@ const Links = (props) => {
     }
   )
 }
+
+// lien du menu lorsque l'utilisateur n'est pas connecté.
+// le composant link ou no link permet d'afficher le bon menu en surbrillance
 const LinksNoLogged = (props) => {
   const location = useLocation();
   return (location.pathname === props.route.path)?
@@ -47,6 +53,8 @@ const LinksNoLogged = (props) => {
   <LinkNoActive route={props.route} index={props.index}></LinkNoActive>
 }
 
+// lien du menu lorsque l'utilisateur est connecté.
+// le composant link ou no link permet d'afficher le bon menu en surbrillance
 const LinksLogged = (props)=>{
   const location = useLocation();
   return (location.pathname === props.route.path)?
@@ -55,7 +63,7 @@ const LinksLogged = (props)=>{
 
 }
 
-
+// composant permettant la surbrillance du menu
 const LinkActive = (props) =>{
  return <li className="nav-item active" key={props.index} >
     <Link to={props.route.path} className="nav-link active ">
@@ -64,7 +72,8 @@ const LinkActive = (props) =>{
     </Link>
   </li>
 }
-const LinkNoActive = (props) =>{
+// composant affichange juste le menu
+const LinkNoActive = (props) => {
   return <li className="nav-item" key={props.index} >
   <Link to={props.route.path} className="nav-link">
     <Icons {...props.route} />

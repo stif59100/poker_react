@@ -7,12 +7,14 @@ import Round from "./Round";
 import { Link } from 'react-router-dom';
 import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
 
+// boucle sur l'ensemble des tournois afin de les afficher individuellement par ligne 
 const RoundList = observer((props) => {
     return RoundsModel.rounds.map(
         (round, index) => <Round {...round} {...props}  key={index} />)
 })
 
 
+// bouton pour ajouter un tournois si le droit add_round est actif
 const AddRound = (props) => {
     const rights = props.Profile.user.rights;
     return (
@@ -28,6 +30,7 @@ const AddRound = (props) => {
             : null
     )
 }
+// bouton pour supprimer un tournois si le droit delete tournois est actif
 const DeleteRound = (props) => {
     const rights =  props.Profile.user.rights;
     return (
@@ -44,6 +47,7 @@ const DeleteRound = (props) => {
     )
 }
 
+// template pour affiche la lister et les options ajout et de suppression
 const ReadModeRounds = observer((props) =>{
     PlayerRoundsModel.fetchRounds(props.Profile.user.id)
 return (
@@ -90,8 +94,10 @@ return (
     </section>
 )})
 
+
+// affiche la liste des tournois si l'utilisateur est loggé
+// sinon redirige sur la page d'accueil
 const Rounds = (props) => {
-   
     return (
         // inaccessible si n'est pas logué
         (!props.Profile.loggedIn) ?

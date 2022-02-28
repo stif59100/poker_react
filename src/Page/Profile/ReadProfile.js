@@ -1,4 +1,6 @@
 import { observer } from "mobx-react-lite";
+import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 
 const ReadMode = observer((props) => {
     return (
@@ -12,7 +14,9 @@ const ReadMode = observer((props) => {
                         <div className="col-md-6 bg-grey-dark m-2">
                             <div className="row">
                                 <div className="d-flex justify-content-end m-2">
-                                    <button className="btn-gold-light" onClick={props.HandleEditMode} >Editer</button>
+                                    <Link to="/Profile/Edit">
+                                    <button className="btn-gold-light" >Editer</button>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="row">

@@ -5,19 +5,9 @@ import BackEndRequest from './BackEndRequest';
 class PlayerRoundsModel {
 
     _roundByUser = [];
-    _userByRound = [];
     constructor() {
         // fonctionnalité d'observation si maj les components se mettent à jour grâce à cette fonctionnalité
         makeAutoObservable(this);
-    }
-
-    // requête asynchrone permettant de récupérer les infos de la bdd côté back end node js
-    async fetchUsers(id_round) {
-         await Axios.get(BackEndRequest.UsersByRound + id_round)
-            .then((result) => {
-                this._userByRound = result.data;
-            })
-            .catch();
     }
 
     async fetchRounds(id_user) {
@@ -49,9 +39,5 @@ class PlayerRoundsModel {
         return this._roundByUser;
     }
     
-    get UserByRound(){
-        return this._userByRound;
-    }
-
 }
 export default new PlayerRoundsModel();

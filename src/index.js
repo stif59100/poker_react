@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {  BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import Header from './Page/Header/Header';
 import Footer from './Page/Footer/Footer';
-import Menus from './Models/Menus';
+import MenusModel from './Models/MenusModel';
 import Profile from './Models/Profile';
 
 import './styles/main.scss';
@@ -11,13 +11,12 @@ import './fonts.js';
 
 
 const Routes = () => {
-  
-  useEffect(()=>{
-    console.log("use effect index");
-  })
+  // Page index 
+  // Affiche le bon composant à afficher en fonction de la route 
+  // Switch/Route sont des composants de base de react 
   return <Switch>
     {
-      Menus.Menus(Profile.loggedIn).map(
+      MenusModel.Menus(Profile.loggedIn).map(
         (route, index) =>
           <Route path={route.path} exact={route.exact} key={index}>
             <div className='row'>

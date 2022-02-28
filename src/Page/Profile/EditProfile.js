@@ -1,4 +1,5 @@
-const EditMode = (props) => {
+// page permettant l'edition du profil
+const EditProfile = (props) => {
     return (
         <section classNameName="col-12 Profile" >
             <div className="container bootstrap snippets bootdey color-gold-light">
@@ -111,4 +112,4 @@ const EditMode = (props) => {
         </section >
     )
 }
-export default EditMode;
+export default EditProfile;

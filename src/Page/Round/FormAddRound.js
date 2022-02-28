@@ -1,6 +1,10 @@
 import { point } from "leaflet";
 import { useState } from "react";
 import RoundsModel from "../../Models/RoundsModel";
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+
+
+// forumilaire d'ajout d'un tournois avec ces paramtres de configurations qui le caracterise.
 const FormAddRound = (props) => {
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
@@ -14,23 +18,29 @@ const FormAddRound = (props) => {
     const [addon, setAddon] = useState();
     const [rebuy, setRebuy] = useState();
     const [bounty, setBounty] = useState();
+    
+    // evenement sur le changement de la date du tournois
     const changeDate = (event) => {
         setDate(event.target.value)
     }
+
+    // evenement sur le changement de la heure du tournois
     const changeHour = (event) => {
         setHour(event.target.value)
     }
-
+    // evenement sur le changement du nom du tournois
     const changeName = (event) => {
         setName(event.target.value)
     }
-
+    // evenement sur le changement du status ouvert ou fermé (inscription possible ou non) du tournois
     const changeOpen = (event) => {
         setOpen(event.target.value)
     }
+    // evenement sur l'affectation des points à attribuer au demarrage du tournois
     const changePointAttributs = (event) => {
         setPointAttributs(event.target.value)
     }
+     // evenement sur le nombre de joueur maximun lors tournois
     const changeMaxPlayer = (event) => {
         setMaxPlayer(event.target.value)
     }
@@ -52,6 +62,7 @@ const FormAddRound = (props) => {
     const changeBounty= (event) => {
         setBounty(event.target.value)
     }
+    // evenement sur le bouton d'envoie du formulaire
     const handleSubmitAddRound = (event) => {
 
         event.preventDefault();
@@ -62,8 +73,10 @@ const FormAddRound = (props) => {
 
     }
 
-    return (
-        <section className="col-12 round p-5">
+    return (      
+            (!props.Profils.rights.some((right)=>right.name === "add_round"))?
+            <Redirect to="/errors/rights"/>
+            :<section className="col-12 round p-5">
             <div class="row ">
                 <form class="col-12 col-lg-6 offset-lg-3 bg-grey-light" onSubmit={handleSubmitAddRound}>
 
@@ -124,12 +137,5 @@ const FormAddRound = (props) => {
     )
 }
 
-
-/*
-(!props.Profils.rights[""])?
-<Redirect to="/errors/rights"/>
-:*/
-
 export default FormAddRound;
 
-//setAddMode={props.setAddMode} 

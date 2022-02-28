@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import sha256 from 'sha256';
 import Axios from 'axios';
 
+// formulaire permettant l'inscription sur le site internet.
 const Register = () => {
   const [name_user, SetNameUser] = useState();
   const [firstname_user, SetFirstnameUser] = useState();
