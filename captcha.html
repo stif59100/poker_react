@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+PaveAleatoire.html
+-->
+<html>
+<head>
+<title>PaveAleatoire.html</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div>
+<h1>PaveAleatoire.html</h1>
+<label>Nom d'utilisateur : pbbuguet</label>
+<br><br>
+<form method="GET" action="seConnecterCTRL.php">
+<input type="text" placeholder="Code secret" readonly id="mdp" name="mdp" />
+<br><br>
+<label>Cliquez pour composer les 6 chiffres de votre code secret</label>
+<br>
+
+
+
+<div id="pave"></div>
+<br>
+<input type="button" id="btEffacerLeCode" name="btEffacerLeCode" value="Effacer le code" style="width:300px; height: 50px"/>
+<br><br>
+<a href="utilisateur_ou_mot_de_passe_oublie.php">Nom d'utilisateur ou code secret oublié</a>
+<br><br>
+<input type="submit" id="btConnexion" name="btConnexion" value="Se connecter" disabled style="width:300px; height: 50px" />
+</form>
+<script>
+var mdp = ""
+/**
+*
+* @returns {Array|genererTableauAleatoire.tableauDeChiffres}
+*/
+function genererTableauAleatoire() {
+let tableauDeChiffres = new Array()
+let max = 1
+while (tableauDeChiffres.length < 10 && max < 100) {
+let chiffreGenere = Math.floor(Math.random() * 10)
+//console.log(chiffreGenere)
+let trouve = false
+for (let j = 0; j < tableauDeChiffres.length; j++) {
+if (tableauDeChiffres[j] == chiffreGenere) {
+trouve = true
+}
+}
+if (trouve === false) {
+tableauDeChiffres.push(chiffreGenere)
+}
+max++
+}
+return tableauDeChiffres
+} /// genererTableauAleatoire
+
+
+
+/**
+*
+* @param {type} tableauDeChiffres
+* @param {type} conteneur
+* @returns {undefined}
+*/
+function genrerBoutons(tableauDeChiffres, conteneur, cible) {
+for (let i = 0; i < tableauDeChiffres.length; i++) {
+//console.log("i " + i + " : " + tableauDeChiffres[i])
+//document.getElementById("")
+let bouton = document.createElement("button")
+let texte = document.createTextNode(tableauDeChiffres[i])
+bouton.appendChild(texte)
+if (i % 5 === 0) {
+let rc = document.createElement("br")
+document.getElementById(conteneur).appendChild(rc)
+}
+bouton.setAttribute("style", "width: 50px; height: 50px; margin: 5px")
+bouton.setAttribute("type", "button")
+bouton.addEventListener("click", () => {
+//alert(tableauDeChiffres[i])
+console.log(tableauDeChiffres[i])
+mdp += tableauDeChiffres[i]
+console.log(mdp)
+document.getElementById(cible).value = mdp
+if (mdp.length === 6) {
+console.log("Longueur 6")
+document.getElementById("btConnexion").disabled = false
+}
+return tableauDeChiffres[i]
+})
+document.getElementById(conteneur).appendChild(bouton)
+}
+} /// genrerBoutons
+
+
+
+function getValeurDuBouton(valeur) {
+return valeur
+}
+
+
+
+console.log("TABLEAU")
+tableauDeChiffres = genererTableauAleatoire()
+genrerBoutons(tableauDeChiffres, "pave", "mdp")
+
+
+
+document.getElementById("btEffacerLeCode").addEventListener("click", () => {
+document.getElementById("mdp").value = ""
+})
+
+
+
+document.getElementById("mdp").addEventListener("change", () => {
+console.log("change")
+console.log(document.getElementById("mdp").value.length)
+if (document.getElementById("mdp").value.length === 6) {
+document.getElementById("btConnexion").setAttribute("disabled", false)
+}
+
+
+
+})
+
+
+
+</script>
+</div>
+</body>
+</html>

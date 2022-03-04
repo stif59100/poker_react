@@ -47,7 +47,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.user.firstname}
+                                                {props.Profile.user.firstName}
                                                 </td>
                                             </tr>
 
@@ -60,6 +60,7 @@ const ReadMode = observer((props) => {
                                                 </td>
                                                 <td className="">
                                                     {props.Profile.user.pseudo}
+                                                    
                                                 </td>
                                             </tr>
 

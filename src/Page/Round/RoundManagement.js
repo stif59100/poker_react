@@ -9,15 +9,17 @@ import { useState, useEffect } from 'react';
 
 
 // ligne d'un utilisateur inscrit au tournois.
-const UserRound = ({ name_user, lastname, pseudo_user }) => {
+const UserRound = ({ name_user, firstname_user, pseudo_user }) => {
     return (
 
         <tr>
             <td>{name_user}</td>
-            <td>{lastname}</td>
+            <td>{firstname_user}</td>
             <td>{pseudo_user}</td>
             <td>
-                <button className='btn-gold-light'>Valider</button>
+                <button className='btn-gold-light'>Présent</button>
+                <button className='btn-gold-light'>Absent</button>
+                <button className='btn-gold-light'>Refuser</button>
             </td>
         </tr>
     )

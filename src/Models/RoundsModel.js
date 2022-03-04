@@ -33,15 +33,15 @@ class RoundsModel {
         return this._rounds;
     }
 
-    async fetchdeleteRounds(){
-        this._rounds = [];
-        console.log(" je suis dnas le fecth rounds")
-        await Axios.get(BackEndRequest.deleteRound)
+    async fetchdeleteRounds(rounds){
+        
+        console.log(" je suis dans le fecth rounds")
+        await Axios.delete(BackEndRequest.DeleteRound, {data: rounds})
         .then((result)=>{
             //this._rounds = result.data;
-            result.data.forEach(element =>{
+            /*result.data.forEach(element =>{
              this._rounds.push(this.daoToDto(element))   
-            });
+            });*/
         }
         ).catch();
     }

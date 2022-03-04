@@ -18,7 +18,9 @@ const FormAddRound = (props) => {
     const [addon, setAddon] = useState();
     const [rebuy, setRebuy] = useState();
     const [bounty, setBounty] = useState();
-    
+    const [addSuccess, setAddSuccess] = useState(false)
+    const HaveRight = props.Profile.user.rights.some((right)=>right.name === "add_round")
+ 
     // evenement sur le changement de la date du tournois
     const changeDate = (event) => {
         setDate(event.target.value)
@@ -67,16 +69,20 @@ const FormAddRound = (props) => {
 
         event.preventDefault();
         console.log(props)
-        props.setAddMode(false);
         var round = { name: name, date: date,hour: hour, open: open, points_attributs: points_attributs, maxPlayer: maxPlayer,buyIn: buyIn, rake: rake,stack:stack, addon: addon, rebuy:rebuy, bounty: bounty }
         RoundsModel.fetchAddRound(round);
+        setAddSuccess(true)
 
     }
 
     return (      
-            (!props.Profils.rights.some((right)=>right.name === "add_round"))?
+            (HaveRight)?
             <Redirect to="/errors/rights"/>
-            :<section className="col-12 round p-5">
+            :
+            (addSuccess)?
+            <Redirect to="/Rounds"/>:
+            <section className="col-12 round p-5">
+
             <div class="row ">
                 <form class="col-12 col-lg-6 offset-lg-3 bg-grey-light" onSubmit={handleSubmitAddRound}>
 

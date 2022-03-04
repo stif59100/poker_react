@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -51,8 +51,14 @@ const UnRegister = (props) => {
 
 
 const ManageRound = (props) => {
-    const rights = props.Profile.user.rights;
+    const [rights,setRight] = useState();
+    useEffect(async ()=>
+    {
+        setRight(props.Profile.user.rights);
+    }
+    )
     return (
+    (rights != null )?
     (rights.some((right) => right.name_right === "manage_round") ?           
     <Link to={{ pathname: `/RoundManagement/${props.id_round}` }}>
         <button type="button" className="btn btn-grey-light" >
@@ -60,11 +66,18 @@ const ManageRound = (props) => {
             <span>Gérer</span>
         </button>
     </Link>:
-    null ))
+    null )
+    :null)
 }
 const LaunchRound = (props) => {
-    const rights = props.Profile.user.rights;
+    const [rights,setRight] = useState();
+    useEffect(async ()=>
+    {
+        setRight(props.Profile.user.rights);
+    }
+    )    
     return (
+        (rights)?
         (rights.some((right) => right.name_right === "launch_round") ?           
         <Link to={{ pathname: `/RoundManagement/${props.id_round}` }}>
             <button type="button" className="btn btn-grey-light" >
@@ -73,21 +86,16 @@ const LaunchRound = (props) => {
             </button>
         </Link>
         :null
-    ))
+       
+    ) :null)
 }
 const Round = (props) => {
-    const [DeleteRounds, setDeleteRounds] = useState([])
-
-    const HandleClickCheckox = (event) => {
-        var id_round = event.target.value;
-        DeleteRounds.push(id_round);
-        setDeleteRounds(DeleteRounds);
-    }
+    console.log(props)
     return (
 
         <tr >
             <td >
-                <input className="form-check-input input-grey-light" type="checkbox" value={props.id_round} onClick={HandleClickCheckox} />
+                <input className="form-check-input input-grey-light" type="checkbox" value={props.id_round} onClick={props.handleCheckDelete} />
             </td>
             <td className="select-round col">
                 <label className="text-gold-light">{props.date_round}</label>

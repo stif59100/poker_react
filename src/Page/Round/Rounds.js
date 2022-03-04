@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
@@ -9,8 +9,9 @@ import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
 
 // boucle sur l'ensemble des tournois afin de les afficher individuellement par ligne 
 const RoundList = observer((props) => {
+
     return RoundsModel.rounds.map(
-        (round, index) => <Round {...round} {...props}  key={index} />)
+        (round, index) => <Round {...round} {...props} key={index} handleCheckDelete={props.handleCheckDelete} />)
 })
 
 
@@ -20,11 +21,11 @@ const AddRound = (props) => {
     return (
         (rights) ?
             rights.some((right) => right.name_right === "add_round") ?
-            <Link to="/Round/Add">
-                 <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
-                    <FontAwesomeIcon icon={['fa', 'plus']} />
-                    <span> Ajouter</span>
-                </button>
+                <Link to="/Round/Add">
+                    <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
+                        <FontAwesomeIcon icon={['fa', 'plus']} />
+                        <span> Ajouter</span>
+                    </button>
                 </Link>
                 : null
             : null
@@ -32,67 +33,98 @@ const AddRound = (props) => {
 }
 // bouton pour supprimer un tournois si le droit delete tournois est actif
 const DeleteRound = (props) => {
-    const rights =  props.Profile.user.rights;
+    const rights = props.Profile.user.rights;
     return (
         (rights) ?
-            rights.some((right) => right.name_right === "delete_round") ?           
-            <Link to="/Round/Delete">
-                    <button type='button' className="btn btn-gold-light" onClick={props.EnableDeleteMode}>
-                        <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-                        <span> Supprimer</span>
-                    </button>
-                    </Link>
+            rights.some((right) => right.name_right === "delete_round") ?
+
+                <button type='button' className="btn btn-gold-light" onClick={props.handleDelete}>
+
+                    <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+                    <span> Supprimer</span>
+                </button>
+
                 : null
             : null
     )
 }
 
-// template pour affiche la lister et les options ajout et de suppression
-const ReadModeRounds = observer((props) =>{
+// template pour affiche la liste et les options ajout et de suppression
+const ReadModeRounds = observer((props) => {
     PlayerRoundsModel.fetchRounds(props.Profile.user.id)
-return (
-    <section className="col-12 round p-5">
-        <div className="row">
-            <div className="col-12 col-lg-10 offset-lg-1">
-                <div className="action-round d-flex justify-content-end">
-                    <AddRound {...props} />
-                    <DeleteRound {...props}  EnableDeleteMode={props.EnableDeleteMode} />
+    const handleDelete = () => {
+        RoundsModel.fetchdeleteRounds(arrayIdDelete)
+       // RoundsModel.fetchGetRounds()
+    }
+    const handleCheckDelete = (event) => {
+        console.log(event.target.checked)        // création tableau provisoire pour récupérer l'id du round sélectionné
+        let arrayId = arrayIdDelete
+        // boucle permettant de vérifier la présence de l'élément dans le tableau 
+        let idExist = arrayId.some((element) => {
+           return element == event.target.value
+        })
+        // on ajoute la valeur du round sélectionné
+        if (event.target.checked){
+        if (!idExist) {
+            arrayId.push(event.target.value)
+        }
+    }else{
+            let index = arrayId.indexOf(event.target.value)
+            arrayId.splice(index, 1)
+            console.log(index)
+            console.log('uncheckdelete')
+            console.log(arrayId)
+        }
+        // on affecte la valeur du nouveau tableau présent dans le state
+        setArrayDelete(arrayId)
+        
+        console.log(arrayIdDelete)
+    }
+    const [arrayIdDelete, setArrayDelete] = useState([]);
+    return (
+        <section className="col-12 round p-5">
+            <div className="row">
+                <div className="col-12 col-lg-10 offset-lg-1">
+                    <div className="action-round d-flex justify-content-end">
+                        <AddRound {...props} />
+                        <DeleteRound {...props} handleDelete={handleDelete} />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className="row">
-            <div className="col-12 col-lg-10 offset-lg-1 table-responsive">
-                <table className='table bg-grey-dark'>
-                    <caption className="color-gold-light">List of rounds</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                <span className='color-gold-light'>Select</span>
-                            </th>
-                            <th scope="col">
-                                <FontAwesomeIcon icon={["far", "calendar"]}></FontAwesomeIcon>
-                                <span className='color-gold-light'>Date</span>
-                            </th>
-                            <th scope="col">
-                                <span className='color-gold-light'>Heure</span>
-                            </th>
-                            <th scope="col">
-                                <span className='color-gold-light'>name</span>
-                            </th>
-                            <th scope="col">
-                                <span className='color-gold-light'>action</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <RoundList {...props} />
-                    </tbody>
-                </table>
+            <div className="row">
+                <div className="col-12 col-lg-10 offset-lg-1 table-responsive">
+                    <table className='table bg-grey-dark'>
+                        <caption className="color-gold-light">Liste des tournois</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <span className='color-gold-light'>Select</span>
+                                </th>
+                                <th scope="col">
+                                    <FontAwesomeIcon icon={["far", "calendar"]}></FontAwesomeIcon>
+                                    <span className='color-gold-light'>Date</span>
+                                </th>
+                                <th scope="col">
+                                    <span className='color-gold-light'>Heure</span>
+                                </th>
+                                <th scope="col">
+                                    <span className='color-gold-light'>name</span>
+                                </th>
+                                <th scope="col">
+                                    <span className='color-gold-light'>action</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <RoundList {...props} handleCheckDelete={handleCheckDelete} />
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-    </section>
-)})
+        </section>
+    )
+})
 
 
 // affiche la liste des tournois si l'utilisateur est loggé
@@ -102,7 +134,7 @@ const Rounds = (props) => {
         // inaccessible si n'est pas logué
         (!props.Profile.loggedIn) ?
             <Redirect to="/"></Redirect> :
-            <ReadModeRounds {...props}  />
+            <ReadModeRounds {...props} />
     )
 
 }

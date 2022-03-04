@@ -31,7 +31,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.lastName}></input>
+                                                    <input type="text" value={props.Profile.user.lastName}></input>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -42,7 +42,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.firstName}></input>
+                                                    <input type="text" value={props.Profile.user.firstName}></input>
                                                 </td>
                                             </tr>
 
@@ -54,7 +54,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.pseudo}></input>
+                                                    <input type="text" value={props.Profile.user.pseudo}></input>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -76,7 +76,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.email}></input>
+                                                    <input type="text" value={props.Profile.user.email}></input>
                                                 </td>
                                             </tr>
                                             <tr>
