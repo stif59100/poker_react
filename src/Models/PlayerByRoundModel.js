@@ -12,7 +12,10 @@ class PlayerByRoundModel{
     async fetchUsers(id_round) {
         await Axios.get(BackEndRequest.UsersByRound + id_round)
         .then((result) => {
-            this._userByRound = result.data;
+            return result;
+        }).then((result) => {
+            this._userByRound = result.data
+            return  this._userByRound;
         })
         .catch();
     }
@@ -20,4 +23,4 @@ class PlayerByRoundModel{
         return this._userByRound;
     }
 }
-export default new PlayerByRoundModel;
+export default new PlayerByRoundModel();

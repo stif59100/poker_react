@@ -168,11 +168,6 @@ class MenusModel {
     } 
   ];
 
-  // Constructeur par default.
-  constructor() {
-  }
-
-
   // Fonction qui trie le menu en fonction de l'utilisateur
   // authentifié et de sa proprieté Order Ou OrderLoggedIn
   Menus(loggedIn) {

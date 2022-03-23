@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
@@ -7,8 +6,8 @@ import RoundsModel from "../../Models/RoundsModel";
 
 
 const RegisterOrUnRegister = (props) => {
-
-    const rounds = PlayerRoundsModel.RoundByUser;
+    const [rounds] = useState(PlayerRoundsModel.RoundByUser);
+    console.log(rounds)
     return (
         (rounds) ?
             rounds.some(round => round.id_round === props.id_round) ?
@@ -21,8 +20,8 @@ const RegisterOrUnRegister = (props) => {
 
 const Register = (props) => {
     const handleClickRegister = async (e) => {
-        await PlayerRoundsModel.registerRound(props.id_round, props.Profile.user.id);
-        await PlayerRoundsModel.fetchRounds(props.Profile.user.id)
+        await PlayerRoundsModel.registerRound(props.id_round, props.Profile.id);
+        await PlayerRoundsModel.fetchRounds(props.Profile.id)
         await RoundsModel.fetchGetRounds()
     }
     return (
@@ -36,8 +35,8 @@ const Register = (props) => {
 const UnRegister = (props) => {
 
     const handleClickUnRegister = async (e) => {
-        await PlayerRoundsModel.unRegisterRound(props.id_round, props.Profile.user.id);
-        await PlayerRoundsModel.fetchRounds(props.Profile.user.id)
+        await PlayerRoundsModel.unRegisterRound(props.id_round, props.Profile.id);
+        await PlayerRoundsModel.fetchRounds(props.Profile.id)
         await RoundsModel.fetchGetRounds()
     }
 
@@ -51,15 +50,10 @@ const UnRegister = (props) => {
 
 
 const ManageRound = (props) => {
-    const [rights,setRight] = useState();
-    useEffect(async ()=>
-    {
-        setRight(props.Profile.user.rights);
-    }
-    )
+    console.log(props)
     return (
-    (rights != null )?
-    (rights.some((right) => right.name_right === "manage_round") ?           
+    (props.rights && props.rights.length > 0)?
+    (props.rights.some((right) => right.name_right === "manage_round") ?           
     <Link to={{ pathname: `/RoundManagement/${props.id_round}` }}>
         <button type="button" className="btn btn-grey-light" >
             <FontAwesomeIcon icon={["fas", "registered"]} />
@@ -70,15 +64,9 @@ const ManageRound = (props) => {
     :null)
 }
 const LaunchRound = (props) => {
-    const [rights,setRight] = useState();
-    useEffect(async ()=>
-    {
-        setRight(props.Profile.user.rights);
-    }
-    )    
     return (
-        (rights)?
-        (rights.some((right) => right.name_right === "launch_round") ?           
+        (props.rights && props.rights.length > 0)?
+        (props.rights.some((right) => right.name_right === "launch_round") ?           
         <Link to={{ pathname: `/RoundManagement/${props.id_round}` }}>
             <button type="button" className="btn btn-grey-light" >
                 <FontAwesomeIcon icon={["fas", "registered"]} />
@@ -90,9 +78,8 @@ const LaunchRound = (props) => {
     ) :null)
 }
 const Round = (props) => {
-    console.log(props)
-    return (
 
+    return (
         <tr >
             <td >
                 <input className="form-check-input input-grey-light" type="checkbox" value={props.id_round} onClick={props.handleCheckDelete} />

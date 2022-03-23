@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 
 const ReadMode = observer((props) => {
@@ -36,7 +35,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.user.lastName}
+                                                    {props.Profile.lastName}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -47,7 +46,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                {props.Profile.user.firstName}
+                                                {props.Profile.firstName}
                                                 </td>
                                             </tr>
 
@@ -59,7 +58,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.user.pseudo}
+                                                    {props.Profile.pseudo}
                                                     
                                                 </td>
                                             </tr>
@@ -84,7 +83,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.user.email}
+                                                    {props.Profile.email}
                                                 </td>
                                             </tr>
                                             <tr>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
@@ -6,6 +6,8 @@ import RoundsModel from "../../Models/RoundsModel";
 import Round from "./Round";
 import { Link } from 'react-router-dom';
 import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
+import Rights from '../../Models/Rights';
+
 
 // boucle sur l'ensemble des tournois afin de les afficher individuellement par ligne 
 const RoundList = observer((props) => {
@@ -17,10 +19,9 @@ const RoundList = observer((props) => {
 
 // bouton pour ajouter un tournois si le droit add_round est actif
 const AddRound = (props) => {
-    const rights = props.Profile.user.rights;
     return (
-        (rights) ?
-            rights.some((right) => right.name_right === "add_round") ?
+        (props.rights && props.rights.length > 0) ?
+        props.rights.some((right) => right.name_right === "add_round") ?
                 <Link to="/Round/Add">
                     <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
                         <FontAwesomeIcon icon={['fa', 'plus']} />
@@ -33,10 +34,9 @@ const AddRound = (props) => {
 }
 // bouton pour supprimer un tournois si le droit delete tournois est actif
 const DeleteRound = (props) => {
-    const rights = props.Profile.user.rights;
     return (
-        (rights) ?
-            rights.some((right) => right.name_right === "delete_round") ?
+        (props.rights && props.rights.length > 0) ?
+        props.rights.some((right) => right.name_right === "delete_round") ?
 
                 <button type='button' className="btn btn-gold-light" onClick={props.handleDelete}>
 
@@ -51,17 +51,24 @@ const DeleteRound = (props) => {
 
 // template pour affiche la liste et les options ajout et de suppression
 const ReadModeRounds = observer((props) => {
-    PlayerRoundsModel.fetchRounds(props.Profile.user.id)
+    const [arrayIdDelete, setArrayDelete] = useState([]);
+    const [rights,setRights] = useState();
+
+    useEffect(async ()=>{
+        setRights(Rights.rights);
+    });
+
     const handleDelete = () => {
-        RoundsModel.fetchdeleteRounds(arrayIdDelete)
-       // RoundsModel.fetchGetRounds()
+        RoundsModel.fetchdeleteRounds(arrayIdDelete);
+        RoundsModel.fetchGetRounds();
     }
+
     const handleCheckDelete = (event) => {
-        console.log(event.target.checked)        // création tableau provisoire pour récupérer l'id du round sélectionné
+         // création tableau provisoire pour récupérer l'id du round sélectionné
         let arrayId = arrayIdDelete
         // boucle permettant de vérifier la présence de l'élément dans le tableau 
         let idExist = arrayId.some((element) => {
-           return element == event.target.value
+           return element === event.target.value
         })
         // on ajoute la valeur du round sélectionné
         if (event.target.checked){
@@ -71,23 +78,17 @@ const ReadModeRounds = observer((props) => {
     }else{
             let index = arrayId.indexOf(event.target.value)
             arrayId.splice(index, 1)
-            console.log(index)
-            console.log('uncheckdelete')
-            console.log(arrayId)
         }
         // on affecte la valeur du nouveau tableau présent dans le state
         setArrayDelete(arrayId)
-        
-        console.log(arrayIdDelete)
     }
-    const [arrayIdDelete, setArrayDelete] = useState([]);
     return (
         <section className="col-12 round p-5">
             <div className="row">
                 <div className="col-12 col-lg-10 offset-lg-1">
                     <div className="action-round d-flex justify-content-end">
-                        <AddRound {...props} />
-                        <DeleteRound {...props} handleDelete={handleDelete} />
+                        <AddRound {...props} rights={rights}/>
+                        <DeleteRound {...props} handleDelete={handleDelete} rights={rights} />
                     </div>
                 </div>
             </div>
@@ -101,7 +102,6 @@ const ReadModeRounds = observer((props) => {
                                     <span className='color-gold-light'>Select</span>
                                 </th>
                                 <th scope="col">
-                                    <FontAwesomeIcon icon={["far", "calendar"]}></FontAwesomeIcon>
                                     <span className='color-gold-light'>Date</span>
                                 </th>
                                 <th scope="col">
@@ -116,7 +116,7 @@ const ReadModeRounds = observer((props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <RoundList {...props} handleCheckDelete={handleCheckDelete} />
+                            <RoundList {...props} handleCheckDelete={handleCheckDelete} rights={rights}/>
                         </tbody>
                     </table>
                 </div>

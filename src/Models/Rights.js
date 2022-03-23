@@ -3,6 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import BackEndRequest from './BackEndRequest';
 class Rights
 {
+    _rights =  [];
     constructor() {
         makeAutoObservable(this);     
     }
@@ -10,15 +11,19 @@ class Rights
         var data = {id_user:user_id};
         return await Axios.post(BackEndRequest.Rights,data)
         .then((response) => {
-            return  response.data
+            return  response.data;
         })
         .then((rights)=>{
+            this._rights = rights;
             return  rights;
         })
         .catch(function (error) {
             console.log(error);
         });
 
+    }
+    get rights(){
+        return this._rights;
     }
 }
 

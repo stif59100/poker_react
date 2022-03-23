@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import PlayerByRoundModel from '../../Models/PlayerByRoundModel';
 import RoundsModel from '../../Models/RoundsModel';
 import { useState, useEffect } from 'react';
+import Rights from '../../Models/Rights';
 
 
 
@@ -28,12 +29,10 @@ const UserRound = ({ name_user, firstname_user, pseudo_user }) => {
 
 // boucle sur la liste des utilisateurs inscrit au tournois afin de les afficher individuelllement par ligne
 const UsersRegisterRound = (props) => {
-    const [players, setPlayers] = useState([]);
+    const [players, setPlayers] = useState([]);       
+
     useEffect(async () => {
-        if(players.length === 0 ){
-            await PlayerByRoundModel.fetchUsers(props.Id_Round);
-            setPlayers(PlayerByRoundModel.UserByRound)
-        }
+        setPlayers(PlayerByRoundModel.UserByRound)
     })
     // Boucle sur la liste des utilisateurs inscrit dans la manche
     return players.map((user, key) => <UserRound {...user} key={key} />)
@@ -42,12 +41,11 @@ const UsersRegisterRound = (props) => {
 
 // affiche les informations du formulaire pour le tournois
 const FormPropertiesRound = (props) => {
-    console.log(props.IdRound);
     const [round, setRound] = useState(null);
     const [rounds, setRounds] = useState([]);
     useEffect(() => {
         if (!round) {
-            setRounds(toJS(RoundsModel.rounds));
+            setRounds(RoundsModel.rounds);
             setRound(rounds.find((round) => round.id_round == props.IdRound));
         }
     });
@@ -222,7 +220,7 @@ const UsersRegisterRoundContainer = observer((props) => {
                 </tr>
             </thead>
             <tbody>
-                <UsersRegisterRound Id_Round={props.IdRound} />
+                <UsersRegisterRound {...props} />
             </tbody>
         </table>
     )
@@ -234,7 +232,8 @@ const UsersRegisterRoundContainer = observer((props) => {
 // si l'utilisateur ne dipose pas du droit il est rediriger sur la page accueil
 const RoundManagement = (props) => {
     const params = useParams();
-    const rights = props.Profile.user.rights;
+    const [rights] =  useState(Rights.rights);
+    PlayerByRoundModel.fetchUsers(params.id)
     return (
         (rights.some((right) => right.name_right === "manage_round")) ?
             <section >

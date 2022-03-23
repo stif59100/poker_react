@@ -53,7 +53,7 @@ const Register = () => {
           let resultText = "";
 
           // Tableau ordinal contenant 0 ou 1 objet JSON
-          if (result.affectedRows == 1) {
+          if (result.affectedRows === 1) {
             resultText = "Vous êtes inscrit !"
           } else {
             resultText = result[0]

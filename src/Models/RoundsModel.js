@@ -38,12 +38,8 @@ class RoundsModel {
         console.log(" je suis dans le fecth rounds")
         await Axios.delete(BackEndRequest.DeleteRound, {data: rounds})
         .then((result)=>{
-            //this._rounds = result.data;
-            /*result.data.forEach(element =>{
-             this._rounds.push(this.daoToDto(element))   
-            });*/
-        }
-        ).catch();
+             
+        }).catch();
     }
     daoToDto (dao){
         let dto = {
