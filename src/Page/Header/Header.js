@@ -7,10 +7,10 @@ const Header = (props) => {
   return (
     <header className="col-12 bg-grey-dark">
       <div className="row top-bar">
-          <LeftHeader />
-          <RightHeader />
+        <LeftHeader />
+        <RightHeader />
       </div>
-          <Menu Profile={props.Profile} />
+      <Menu />
     </header>
 
   );

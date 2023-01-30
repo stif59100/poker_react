@@ -1,81 +1,77 @@
 import React, { useEffect, useState } from 'react';
-import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import RoundsModel from "../../Models/RoundsModel";
 import Round from "./Round";
 import { Link } from 'react-router-dom';
-import PlayerRoundsModel from '../../Models/PlayerRoundsModel';
-import Rights from '../../Models/Rights';
+import { useContext } from 'react';
+import RoundsContext from '../../Context/RoundsContext';
+import UserContext from '../../Context/UserContext';
+import { HaveRight } from "../../Services/UserService"
+import { DeleteRounds, GetRounds } from "../../Services/RoundsService";
+import { GetRoundsRegister } from "../../Services/PlayerRoundsService"
+import { AddRoundRight, DeleteRoundRight } from '../../Constantes/Right';
 
 
 // boucle sur l'ensemble des tournois afin de les afficher individuellement par ligne 
-const RoundList = observer((props) => {
-
-    return RoundsModel.rounds.map(
-        (round, index) => <Round {...round} {...props} key={index} handleCheckDelete={props.handleCheckDelete} />)
+const RoundList = ((props) => {
+    const { rounds } = useContext(RoundsContext)
+    const { user } = useContext(UserContext)
+    const [roundsRegisterUser, setRoundsRegisterUser] = useState([])
+    useEffect(() => GetRoundsRegister(user.id, setRoundsRegisterUser), [setRoundsRegisterUser, user.id]);
+    return rounds.map(
+        (round, index) => <Round {...round} key={index} roundsRegisterUser={roundsRegisterUser} setRoundsRegisterUser={setRoundsRegisterUser} handleCheckDelete={props.handleCheckDelete} />)
 })
 
 
 // bouton pour ajouter un tournois si le droit add_round est actif
 const AddRound = (props) => {
     return (
-        (props.rights && props.rights.length > 0) ?
-        props.rights.some((right) => right.name_right === "add_round") ?
-                <Link to="/Round/Add">
-                    <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
-                        <FontAwesomeIcon icon={['fa', 'plus']} />
-                        <span> Ajouter</span>
-                    </button>
-                </Link>
-                : null
+        HaveRight(AddRoundRight) ?
+            <Link to="/Round/Add">
+                <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
+                    <FontAwesomeIcon icon={['fa', 'plus']} />
+                    <span> Ajouter</span>
+                </button>
+            </Link>
             : null
     )
 }
 // bouton pour supprimer un tournois si le droit delete tournois est actif
 const DeleteRound = (props) => {
     return (
-        (props.rights && props.rights.length > 0) ?
-        props.rights.some((right) => right.name_right === "delete_round") ?
+        HaveRight(DeleteRoundRight) ?
+            <button type='button' className="btn btn-gold-light" onClick={props.handleDelete}>
 
-                <button type='button' className="btn btn-gold-light" onClick={props.handleDelete}>
+                <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+                <span> Supprimer</span>
+            </button>
 
-                    <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-                    <span> Supprimer</span>
-                </button>
-
-                : null
             : null
     )
 }
 
 // template pour affiche la liste et les options ajout et de suppression
-const ReadModeRounds = observer((props) => {
+const ReadModeRounds = () => {
     const [arrayIdDelete, setArrayDelete] = useState([]);
-    const [rights,setRights] = useState();
-
-    useEffect(async ()=>{
-        setRights(Rights.rights);
-    });
 
     const handleDelete = () => {
-        RoundsModel.fetchdeleteRounds(arrayIdDelete);
-        RoundsModel.fetchGetRounds();
+        DeleteRounds(arrayIdDelete);
+        GetRounds();
     }
 
     const handleCheckDelete = (event) => {
-         // création tableau provisoire pour récupérer l'id du round sélectionné
+        // création tableau provisoire pour récupérer l'id du round sélectionné
         let arrayId = arrayIdDelete
         // boucle permettant de vérifier la présence de l'élément dans le tableau 
         let idExist = arrayId.some((element) => {
-           return element === event.target.value
+            return element === event.target.value
         })
         // on ajoute la valeur du round sélectionné
-        if (event.target.checked){
-        if (!idExist) {
-            arrayId.push(event.target.value)
-        }
-    }else{
+        if (event.target.checked) {
+            if (!idExist) {
+                arrayId.push(event.target.value)
+            }
+        } else {
             let index = arrayId.indexOf(event.target.value)
             arrayId.splice(index, 1)
         }
@@ -87,8 +83,8 @@ const ReadModeRounds = observer((props) => {
             <div className="row">
                 <div className="col-12 col-lg-10 offset-lg-1">
                     <div className="action-round d-flex justify-content-end">
-                        <AddRound {...props} rights={rights}/>
-                        <DeleteRound {...props} handleDelete={handleDelete} rights={rights} />
+                        <AddRound />
+                        <DeleteRound  handleDelete={handleDelete} />
                     </div>
                 </div>
             </div>
@@ -116,7 +112,7 @@ const ReadModeRounds = observer((props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <RoundList {...props} handleCheckDelete={handleCheckDelete} rights={rights}/>
+                            <RoundList  handleCheckDelete={handleCheckDelete} />
                         </tbody>
                     </table>
                 </div>
@@ -124,15 +120,16 @@ const ReadModeRounds = observer((props) => {
 
         </section>
     )
-})
+}
 
 
 // affiche la liste des tournois si l'utilisateur est loggé
 // sinon redirige sur la page d'accueil
 const Rounds = (props) => {
+    const { user } = useContext(UserContext);
     return (
         // inaccessible si n'est pas logué
-        (!props.Profile.loggedIn) ?
+        (!user?.loggedIn) ?
             <Redirect to="/"></Redirect> :
             <ReadModeRounds {...props} />
     )

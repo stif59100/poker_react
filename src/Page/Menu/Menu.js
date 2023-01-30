@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import MenusModel from '../../Models/MenusModel';
+import { MenuSorted } from '../../Services/MenuService';
 import { useLocation } from 'react-router-dom'
 import React, { useState } from 'react';
-
+import UserContext from "../../Context/UserContext";
 // Creation du menu global
-const Menu = (props) => {
+const Menu = () => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
@@ -23,7 +23,7 @@ const Menu = (props) => {
           </button>
           <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarSupportedContent">
             <ul className="navbar-nav justify-content-end">
-              <Links Profile={props.Profile}/>
+              <Links/>
             </ul>
           </div>
         </navbar>
@@ -34,10 +34,11 @@ const Menu = (props) => {
 }
 // boucle sur le model menu permettant afficher le bon composant en fonction de la route.
 // et également en fonction de l'utilisateur connecte oun on et de ces droits.
-const Links = (props) => {
-  return MenusModel.Menus(props.Profile.loggedIn).map(
+const Links = () => {
+  const { user } = React.useContext(UserContext);
+  return MenuSorted(user).map(
     (route, index) => {
-     return (props.Profile.loggedIn)?
+     return (user?.loggedIn)?
          (route.displayLoggedIn )?<LinksLogged route={route} index={index} key={index}></LinksLogged>:null
       :(route.display)?<LinksNoLogged route={route} index={index} key={index} ></LinksNoLogged>:null
     }

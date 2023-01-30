@@ -10,22 +10,7 @@ import LogOut from '../Page/Profile/LogOut';
 import FormAddRound from '../Page/Round/FormAddRound';
 import RoundManagement from '../Page/Round/RoundManagement';
 import EditProfile from '../Page/Profile/EditProfile';
-
-
-// Class Model utlisé pour definir statiquement les menus.
-
-class MenusModel {
-
-
-  // Path => path est l'url à laquelle on accède
-  // Display => menu visible utilisateur non authentifié
-  // DisplayLoggedIn => menu visible utilisateur authentifié.
-  // Exact => on indique qu'on voudra bien cette route de facon strict 
-  // Component => Nom du componant à afficher pour le path defini
-  // Order => Defini l'ordre d'affichage du menu utilisateur non authentifié.
-  // OrderLoggedIn => Defini l'ordre d'affichage du menu  utilisateur authentifié.
-  // Icon : Icon à affiché dans le menu
-  _menus = [
+export const Menus = [
     {
       path: '/',    
       exact: true,
@@ -167,38 +152,3 @@ class MenusModel {
       component: ErrorsRights
     } 
   ];
-
-  // Fonction qui trie le menu en fonction de l'utilisateur
-  // authentifié et de sa proprieté Order Ou OrderLoggedIn
-  Menus(loggedIn) {
-    var menu = [];
-    if (loggedIn) {
-      menu =  this._menus.sort(
-        // comparaison de la valeur actuelle avec la précédente valeur
-        // menu valeur actuelle menu1 valeur suivante
-        (menu, menu1) => {
-          if (menu.orderLoggedIn < menu1.orderLoggedIn){
-            return -1;
-          }
-          else if (menu.orderLoggedIn > menu1.orderLoggedIn){
-            return 1;
-          }
-          else
-            return 0;
-        });
-    }
-    else {
-      menu = this._menus.sort(
-        (menu, menu1) => {
-          if (menu.order < menu1.order)
-            return -1;
-          else if (menu.order > menu1.order)
-            return 1;
-          else
-            return 0;
-        });
-    }
-    return menu;
-  }
-}
-export default new MenusModel();

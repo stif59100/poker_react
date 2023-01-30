@@ -1,7 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from '../../Context/UserContext';
 
-const ReadMode = observer((props) => {
+const ReadProfile = observer((props) => {
+    const user = useContext(UserContext)
     return (
         <section>
             <div className="container bootstrap snippets bootdey color-gold-light">
@@ -35,7 +38,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.lastName}
+                                                    {user.lastName}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -46,7 +49,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                {props.Profile.firstName}
+                                                {user.firstName}
                                                 </td>
                                             </tr>
 
@@ -58,7 +61,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.pseudo}
+                                                    {user.pseudo}
                                                     
                                                 </td>
                                             </tr>
@@ -83,7 +86,7 @@ const ReadMode = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    {props.Profile.email}
+                                                    {user.email}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -120,4 +123,4 @@ const ReadMode = observer((props) => {
     )
 }
 )
-export default ReadMode;
+export default ReadProfile;

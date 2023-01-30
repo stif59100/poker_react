@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import  UserContext  from '../../Context/UserContext';
+
+
 // page permettant l'edition du profil
 const EditProfile = (props) => {
+    const user = useContext(UserContext)
     return (
         <section classNameName="col-12 Profile" >
             <div className="container bootstrap snippets bootdey color-gold-light">
@@ -31,7 +36,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.user.lastName}></input>
+                                                    <input type="text" value={user.lastName}></input>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -42,7 +47,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.user.firstName}></input>
+                                                    <input type="text" value={user.firstName}></input>
                                                 </td>
                                             </tr>
 
@@ -54,7 +59,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.user.pseudo}></input>
+                                                    <input type="text" value={user.pseudo}></input>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -76,7 +81,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={props.Profile.user.email}></input>
+                                                    <input type="text" value={user.email}></input>
                                                 </td>
                                             </tr>
                                             <tr>

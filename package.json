@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.22.0",
     "bootstrap": "^5.1.3",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "fontawesome": "^5.6.3",
     "leaflet": "^1.7.1",
     "mobx": "^6.3.8",
@@ -24,7 +25,7 @@
     "react-leaflet": "^2.7.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "sha256": "^0.2.0",
     "vanilla-tilt": "^1.7.2",
     "web-vitals": "^1.0.1"
@@ -54,6 +55,12 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^10.4.0",
     "sass": "^1.42.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "nonGlobalStepBaseDir": "cypress/e2e",
+    "step_definitions": "cypress/e2e"
   }
 }
