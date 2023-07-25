@@ -1,13 +1,12 @@
+import { Link } from 'react-router-dom';
 
-
-
-const Championship = () => {
+const ChampionShipDetail = () => {
   return (
-    <section className="row">
+    <section className="col-12">
+      <div className="row">
       <div className="col-12 col-lg-6 offset-3 championship">
         <table className="table my-3 bg-grey-dark color-gold-light border-gold-light my-3 w-100">
           <tbody>
-            <tr colSpan="3"><th colSpan={3}><select><option>Sélectionnez le championnat</option></select></th></tr>
             <tr>
               <th>Place</th>
               <th>Joueurs</th>
@@ -46,7 +45,8 @@ const Championship = () => {
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </section>)
 };
-export default Championship;
+export default ChampionShipDetail;

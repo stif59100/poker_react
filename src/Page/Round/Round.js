@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Register from "./Register";
 import UnRegister from "./UnRegister";
 import ManageRound from "./ManageRound";
@@ -6,10 +6,12 @@ import LaunchRound from "./LaunchRound";
 
 const RegisterOrUnRegister = (props) => {
     return (
-        props.roundsRegisterUser.some(round => round.id_round === props.id_round) ?
+        ((!props.roundsRegisterUser || props.roundsRegisterUser.length !== 0)?
+        (props.roundsRegisterUser.some(round => round.id_round == props.id_round) ?
                 <UnRegister {...props} id_round={props.id_round} />
-                : <Register {...props} id_round={props.id_round} />
-           )
+                : <Register {...props} id_round={props.id_round} />)
+            : <Register {...props} id_round={props.id_round} />)
+    )
 }
 
 const Round = (props) => {

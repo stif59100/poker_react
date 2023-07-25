@@ -37,8 +37,6 @@ class Profile {
     get pseudo() {
         return this._pseudo;
     }
-    HaveRight(right){
-        this._rights.some((currentRight)=>currentRight.name === right);
-    }
+
 }
 export default Profile;

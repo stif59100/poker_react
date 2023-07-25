@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { RegisterRound, GetRoundsRegister } from '../../Services/PlayerRoundsService';
-import { useContext } from 'react';
-import UserContext from '../../Context/UserContext';
 
 const Register = (props) => {
-    const { user } = useContext(UserContext);
 
+    console.log(props.user)
     const handleClickRegister = async (e) => {
-        await RegisterRound(props.id_round, user.id);
-        await GetRoundsRegister(user.id,props.setRoundsRegisterUser)
+        console.log("je suis dans le handleResister")
+        await RegisterRound(props.id_round, props.user.id);
+        await GetRoundsRegister(props.user.id,props.setRoundsRegisterUser)
     }
 
     return (

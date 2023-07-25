@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { RegisterFn } from "../../Services/UserService"
+import { ErrorsForm } from '../Notifications/ErrorsForm';
+import { SuccessForm } from '../Notifications/SuccessForm';
 
 // formulaire permettant l'inscription sur le site internet.
 const Register = () => {
+    const [errorsForm, setErrorsForm] = useState([]);
+    const [successForm, setSuccessForm] = useState([]);
   const [name_user, SetNameUser] = useState();
   const [firstname_user, SetFirstnameUser] = useState();
   const [pseudo_user, SetPseudoUser] = useState();
@@ -44,12 +48,14 @@ const Register = () => {
       "email_user": email_user,
       "password_user": password_user
     }
-    RegisterFn(user)
+    RegisterFn(user,setErrorsForm,setSuccessForm)
   }
 
   return (
     <section className="row register">
       <div className="col-12 col-lg-6 offset-lg-3">
+        <ErrorsForm errorsForm={errorsForm} ></ErrorsForm>
+        <SuccessForm successForm={successForm} ></SuccessForm>
         <form id="formulaire" className="form-inline" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="nameImput" className="w-100 text-left color-gold-light">Nom</label>

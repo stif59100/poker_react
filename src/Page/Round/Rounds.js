@@ -1,39 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { AddRoundRight, DeleteRoundRight } from '../../Constantes/Right';
+import { DeleteRounds, GetRounds } from "../../Services/RoundsService";
+import { GetRoundsRegister } from "../../Services/PlayerRoundsService";
+import { HaveRight } from "../../Services/UserService";
 import Round from "./Round";
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import RoundsContext from '../../Context/RoundsContext';
 import UserContext from '../../Context/UserContext';
-import { HaveRight } from "../../Services/UserService"
-import { DeleteRounds, GetRounds } from "../../Services/RoundsService";
-import { GetRoundsRegister } from "../../Services/PlayerRoundsService"
-import { AddRoundRight, DeleteRoundRight } from '../../Constantes/Right';
 
+const RoundsNotFound = ((props) => {
+  return <tr><td><label>Aucun tournois n'a été trouvé.</label></td></tr> 
+})
 
 // boucle sur l'ensemble des tournois afin de les afficher individuellement par ligne 
 const RoundList = ((props) => {
+    const { user } = useContext(UserContext);
     const { rounds } = useContext(RoundsContext)
-    const { user } = useContext(UserContext)
     const [roundsRegisterUser, setRoundsRegisterUser] = useState([])
-    useEffect(() => GetRoundsRegister(user.id, setRoundsRegisterUser), [setRoundsRegisterUser, user.id]);
-    return rounds.map(
-        (round, index) => <Round {...round} key={index} roundsRegisterUser={roundsRegisterUser} setRoundsRegisterUser={setRoundsRegisterUser} handleCheckDelete={props.handleCheckDelete} />)
+    useEffect(() => GetRoundsRegister(user.id, setRoundsRegisterUser), [user]);
+    return (
+        (rounds.length === 0) ?
+         <RoundsNotFound></RoundsNotFound>   
+        : rounds.map(
+            (round, index) =>
+                <Round {...round}
+                    {...props}
+                    key={index}
+                    roundsRegisterUser={roundsRegisterUser}
+                    setRoundsRegisterUser={setRoundsRegisterUser}
+                    handleCheckDelete={props.handleCheckDelete} />
+        )
+    )
 })
 
 
 // bouton pour ajouter un tournois si le droit add_round est actif
 const AddRound = (props) => {
     return (
-        HaveRight(AddRoundRight) ?
             <Link to="/Round/Add">
                 <button type='button' className="btn btn-gold-light" onClick={props.EnableAddMode}>
                     <FontAwesomeIcon icon={['fa', 'plus']} />
                     <span> Ajouter</span>
                 </button>
-            </Link>
-            : null
+            </Link>   
     )
 }
 // bouton pour supprimer un tournois si le droit delete tournois est actif
@@ -51,13 +62,14 @@ const DeleteRound = (props) => {
 }
 
 // template pour affiche la liste et les options ajout et de suppression
-const ReadModeRounds = () => {
+const ReadModeRounds = (props) => {
     const [arrayIdDelete, setArrayDelete] = useState([]);
-
+    const { setRound } = useContext(RoundsContext);
     const handleDelete = () => {
         DeleteRounds(arrayIdDelete);
         GetRounds();
     }
+    useEffect(()=>  GetRounds(setRound), [] )
 
     const handleCheckDelete = (event) => {
         // création tableau provisoire pour récupérer l'id du round sélectionné
@@ -80,14 +92,20 @@ const ReadModeRounds = () => {
     }
     return (
         <section className="col-12 round p-5">
-            <div className="row">
-                <div className="col-12 col-lg-10 offset-lg-1">
-                    <div className="action-round d-flex justify-content-end">
-                        <AddRound />
-                        <DeleteRound  handleDelete={handleDelete} />
+                {HaveRight(AddRoundRight) ?
+                <div className="row">
+                    <div className="col-12 col-lg-10 offset-lg-1">
+                        <div className="action-round d-flex justify-content-end">
+                            
+                            {HaveRight(AddRoundRight) ?
+                                <AddRound />
+                                : null}
+                            
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
+                : null};
             <div className="row">
                 <div className="col-12 col-lg-10 offset-lg-1 table-responsive">
                     <table className='table bg-grey-dark'>
@@ -112,12 +130,11 @@ const ReadModeRounds = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <RoundList  handleCheckDelete={handleCheckDelete} />
+                            <RoundList handleCheckDelete={handleCheckDelete}  {...props} />
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </section>
     )
 }

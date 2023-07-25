@@ -1,9 +1,9 @@
 import { Redirect } from "react-router-dom";
+import { LogOff } from "../../Services/UserService";
 
 // Deconnexion de l'utilisateur.
 const LogOut = (props) =>{
-    props.Profile.LogOut();
-
+    LogOff();
     return <Redirect to="/"/>
 }
 export default LogOut;           

@@ -1,9 +1,15 @@
 import Axios from "axios";
 import BackEndRequest from '../Constantes/BackEndRequest';
-
+const token = localStorage.getItem("token")
+const AxiosHeader = {
+    headers:
+    {
+        "Authorization": `Bearer ${token}`
+    }
+}
 const GetRounds = async (setRound) => {
     const rounds = [];
-    await Axios.get(BackEndRequest.Rounds)
+    await Axios.get(BackEndRequest.Rounds,AxiosHeader)
         .then((result) => {
             //this._rounds = result.data;
             result.data.forEach(element => {
@@ -13,8 +19,9 @@ const GetRounds = async (setRound) => {
         ).catch();
     setRound(rounds);
 }
+
 const AddRound = async (round) => {
-    await Axios.post(BackEndRequest.AddRound, round)
+    await Axios.post(BackEndRequest.AddRound, round,AxiosHeader)
         .then((result) => {
             this._rounds.push(daoToDto(result.data))
         }
@@ -24,8 +31,7 @@ const AddRound = async (round) => {
 
 
 const DeleteRounds = async (rounds) => {
-    console.log(" je suis dans le fecth rounds")
-    await Axios.delete(BackEndRequest.DeleteRound, { data: rounds })
+    await Axios.delete(BackEndRequest.DeleteRound, { data: rounds },AxiosHeader)
         .then((result) => {
 
         }).catch();

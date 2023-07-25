@@ -1,34 +1,55 @@
 // Class permettant de referencer toutes les urls appeler vers le back end.
 
-const baseUrl = "http://localhost:8080";
-const Authentication =    baseUrl + '/authentication';
+const baseUrl = "https://localhost:44363/api/";
 
-const Rounds = baseUrl + '/rounds';
+const Authentication =    baseUrl + 'Account/Login';
 
-const DeleteRound = baseUrl + '/round/deleteRound'
+const Rounds = baseUrl + 'Rounds';
 
-const AddRound = baseUrl + '/round/add';
+const DeleteRound = baseUrl + 'Round/DeleteRound'
 
-const Rights = baseUrl + '/rightsByUsers';
+const AddRound = baseUrl + 'Round/Add';
 
-const UsersByRound = baseUrl + '/userByRoundId/';
+const Rights = baseUrl + 'Rights';
 
-const RoundByUser = baseUrl + "/roundByUserId/";
+const RightsByUser = baseUrl + 'UserRights/';
 
-const RoundRegister = baseUrl + "/roundplayer/register";
+const UsersByRound = baseUrl + 'userByRoundId/';
 
-const RoundUnRegister = baseUrl + "/roundplayer/unRegister";
+const RoundByUser = baseUrl + "RoundPlayer/";
+
+const RoundRegister = baseUrl + "RoundPlayer/register";
+
+const RoundUnRegister = baseUrl + "RoundPlayer/unRegister";
+
+const RoundElimnate = baseUrl + "RoundPlayer/eliminate";
+
+const Register = baseUrl + "Account/Register";
+
+const GetChampionShips = baseUrl + "Championships/GetAll";
+
+const ChampionShipAdd = baseUrl + "Championship/add";
+
+const GetUsers = baseUrl + "Users"
+
+const GetUserById = baseUrl + "User/"
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-
 export default {
     Authentication,
     Rounds,
     DeleteRound,
     AddRound,
     Rights,
+    RightsByUser,
     UsersByRound,
     RoundByUser,
     RoundRegister,
-    RoundUnRegister
+    RoundUnRegister,
+    Register,
+    GetChampionShips,
+    ChampionShipAdd,
+    GetUsers,
+    GetUserById,
+    RoundElimnate
 }

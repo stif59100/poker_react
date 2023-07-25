@@ -1,28 +1,35 @@
 
 import Axios from "axios";
 import BackEndRequest from '../Constantes/BackEndRequest';
-
-export const GetUsers = async (id_round) => {
-    await Axios.get(BackEndRequest.UsersByRound + id_round)
-        .then((result) => {
-            return result;
-        }).then((result) => {
-            this._userByRound = result.data
-            return this._userByRound;
-        })
-        .catch();
+const token = localStorage.getItem("token")
+const AxiosHeader = {
+    headers:
+    {
+        "Authorization": `Bearer ${token}`
+    }
 }
-
-export const GetRights = async (user_id) => {
-    var data = { id_user: user_id };
-    return await Axios.post(BackEndRequest.Rights, data)
+ const GetRights = async (setRights) => {
+     await Axios.get(BackEndRequest.Rights,AxiosHeader)
         .then((response) => {
-            return response.data;
-        })
-        .then((rights) => {
-            return rights;
+            setRights(response.data);
         })
         .catch(function (error) {
             console.log(error);
         });
+}
+
+ const GetRightsByUser = async (user_id,setRightsSelected) => {
+     await Axios.get(BackEndRequest.RightsByUser + user_id,AxiosHeader)
+         .then((response) => {
+            console.log(response.data)
+             setRightsSelected(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+export {
+    GetRightsByUser,
+    GetRights
 }

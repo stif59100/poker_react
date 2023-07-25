@@ -8,6 +8,12 @@ const OpenRoundRight = 'open_round';
 const CloseRoundRight = 'close_round';
 const ManageRoundRight = 'manage_round';
 const LaunchRoundRight = 'launch_round';
+const AddChampionShip = "add_championship";
+const UpdateChampionShip = "update_championship";
+const DeleteChampionShip = "delete_championship";
+const ManageRights = "manage_rigths";
+const ManageApplication = "manage_application";
+
 export {
     AddRoundRight,
     DeleteRoundRight,
@@ -17,5 +23,10 @@ export {
     UnRegisterRoundRight,
     CloseRoundRight,
     ManageRoundRight,
-    LaunchRoundRight
+    LaunchRoundRight,
+    AddChampionShip,
+    UpdateChampionShip,
+    DeleteChampionShip,
+    ManageRights,
+    ManageApplication
 }

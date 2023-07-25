@@ -1,40 +1,93 @@
-import { useState } from "react";
-import { useContext } from "react";
-import UserContext from '../../Context/UserContext';
-import RigthsReadMode from "./Rigths"
+import { useEffect, useState, useCallback } from "react";
+import { GetRightsByUser, GetRights } from '../../Services/RigthService'
+import { GetUserById } from "../../Services/UserService";
+import { useParams } from 'react-router-dom'
+
+const RightChecked = (props) => {
+    const HandleCheck = (event) => {
+        const currentRightsSelected = props.rightsSelected;
+        const right = props.rights.find((right) => {
+            return right === event.target.value
+        });
+        if (event.target.checked) {
+            currentRightsSelected.push(right);
+        } else {
+            let index = props.rights.indexOf(right);
+            currentRightsSelected.splice(index, 1);
+        }
+        props.setRightsSelected(currentRightsSelected);
+    }
+    // useEffect(() => {
+    //     const checked = props.rightsSelected.some((rightSelected) => {
+    //         return rightSelected.id === props.right.id
+    //     })
+    //     setIsChecked(checked);
+    // }, [props.right.id, props.rightsSelected])
+
+    return (
+        (
+            <input onChange={HandleCheck} type="checkbox" id={props.right.name} value={props.right.name} checked={props.checked}></input>
+        )
+    )
+}
+
+const EditRights = (props) => {
+    return (
+        props.rights.map((right, index) => {
+            let isChecked = false;
+            if (typeof props?.user?.rights !== "undefined") {
+                isChecked = props.user.rights.some(userRight => userRight.rightId === right.id);
+            }
+            return (
+                <div className="form-group" key={index} >
+                    <RightChecked {...props} right={right} isChecked={isChecked}></RightChecked> 
+                    <label forHtml={right.name}>{right.name} </label>
+                </div>
+            )
+        })
+    )
+}
 
 // page permettant l'edition du profil
-const EditProfile = (props) => {
-    const { user,setUser } = useContext(UserContext)
+const UserEdit = (props) => {
+    const [rights, setRights] = useState([]);
+    const params = useParams();
+    const [user, setUser] = useState()
+    const [pseudo, setPseudo] = useState()
+    const [lastName, setLastName] = useState()
+    const [firstname, setFirstName] = useState()
+    const [email, setEmail] = useState();
+    const [userId] = useState(params.id)
 
-    const [firstName,setFirstName]=useState(user.firstName)
-    const [pseudo,setPseudo]=useState(user.pseudo)
-    const [lastName,setLastName]=useState(user.lastName)
-    const [email,setEmail]=useState(user.email);
-    const [rigths] = useState(user.rights)
-    const [loggedIn] = useState(user.loggedIn)
+    useEffect(() => {
 
-    const HandleEditMode = () => {
+        if (!user) {
+            GetRights(setRights)
+            GetUserById(userId, setUser)
+        }
+    }, [userId, user])
+
+
+    const HandleSave = () => {
         const user = {
-            firstName,
             lastName,
+            firstname,
             pseudo,
             email,
-            rigths,
-            loggedIn
         }
-             setUser(user);
+        setUser(user);
     }
+
     const HandleLastName = (event) => {
         setLastName(event.target.value)
     }
     const HandleFirstName = (event) => {
         setFirstName(event.target.value)
     }
-    const HandlePseudo= (event) => {
+    const HandlePseudo = (event) => {
         setPseudo(event.target.value)
     }
-    const HandleEmail= (event) => {
+    const HandleEmail = (event) => {
         setEmail(event.target.value)
     }
     return (
@@ -48,7 +101,7 @@ const EditProfile = (props) => {
                         <div className="col-md-6 bg-grey-dark m-2">
                             <div className="row">
                                 <div className="d-flex justify-content-end m-2">
-                                    <button className="btn-gold-light" onClick={HandleEditMode} >Sauvegarder</button>
+                                    <button className="btn-gold-light" onClick={HandleSave} >Sauvegarder</button>
                                 </div>
                             </div>
                             <div className="row">
@@ -68,7 +121,8 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={lastName} onChange={HandleLastName}></input>
+                                                    {(!user) ? null :
+                                                        <input type="text" value={user.firstName} onChange={HandleLastName}></input>}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -79,7 +133,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={firstName} onChange={HandleFirstName}></input>
+                                                    {(!user) ? null : <input type="text" value={user.lastName} onChange={HandleFirstName}></input>}
                                                 </td>
                                             </tr>
 
@@ -87,11 +141,12 @@ const EditProfile = (props) => {
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-bookmark "></span>
-                                                        Username
+                                                        Pseudo
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={pseudo} onChange={HandlePseudo}></input>
+                                                    {(!user) ? null :
+                                                        <input type="text" value={user.pseudo} onChange={HandlePseudo}></input>}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -102,7 +157,7 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                <RigthsReadMode rigths={rigths}></RigthsReadMode>
+                                                    <EditRights rights={rights} user={user} {...props} ></EditRights>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -113,7 +168,8 @@ const EditProfile = (props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    <input type="text" value={email} onChange={HandleEmail}></input>
+                                                    {(!user) ? null :
+                                                        <input type="text" value={user.email} onChange={HandleEmail}></input>}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -149,4 +205,4 @@ const EditProfile = (props) => {
         </section >
     )
 }
-export default EditProfile;
+export default UserEdit;

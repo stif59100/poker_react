@@ -1,10 +1,13 @@
-import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { useState } from "react";
 import UserContext from '../../Context/UserContext';
+import RigthsReadMode from "./Rigths"
 
-const ReadProfile = observer((props) => {
-    const user = useContext(UserContext)
+const ReadProfile = () => {
+    const { user } = useContext(UserContext)
+    console.log(user)
+    const [rigths] = useState(user.rights)
     return (
         <section>
             <div className="container bootstrap snippets bootdey color-gold-light">
@@ -17,7 +20,7 @@ const ReadProfile = observer((props) => {
                             <div className="row">
                                 <div className="d-flex justify-content-end m-2">
                                     <Link to="/Profile/Edit">
-                                    <button className="btn-gold-light" >Editer</button>
+                                        <button className="btn-gold-light" >Editer</button>
                                     </Link>
                                 </div>
                             </div>
@@ -49,7 +52,7 @@ const ReadProfile = observer((props) => {
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                {user.firstName}
+                                                    {user.firstName}
                                                 </td>
                                             </tr>
 
@@ -62,7 +65,7 @@ const ReadProfile = observer((props) => {
                                                 </td>
                                                 <td className="">
                                                     {user.pseudo}
-                                                    
+
                                                 </td>
                                             </tr>
 
@@ -71,11 +74,11 @@ const ReadProfile = observer((props) => {
                                                 <td>
                                                     <strong>
                                                         <span className="glyphicon glyphicon-eye-open "></span>
-                                                        Role
+                                                        Droits
                                                     </strong>
                                                 </td>
                                                 <td className="">
-                                                    Admin
+                                                   <RigthsReadMode rigths={rigths}></RigthsReadMode>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -122,5 +125,5 @@ const ReadProfile = observer((props) => {
         </section >
     )
 }
-)
+
 export default ReadProfile;

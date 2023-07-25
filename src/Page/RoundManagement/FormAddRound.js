@@ -2,8 +2,6 @@ import { useState } from "react";
 import { AddRound } from "../../Services/RoundsService";
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { AddRoundRight } from '../../Constantes/Right';
-import { useContext } from "react";
-import UserContext from "../../Context/UserContext";
 import { HaveRight } from "../../Services/UserService"
 
 // forumilaire d'ajout d'un tournois avec ces paramtres de configurations qui le caracterise.
@@ -69,7 +67,6 @@ const FormAddRound = (props) => {
     const handleSubmitAddRound = (event) => {
 
         event.preventDefault();
-        console.log(props)
         var round = {
             name: name,
             date: date,
@@ -86,11 +83,10 @@ const FormAddRound = (props) => {
         }
         AddRound(round);
         setAddSuccess(true)
-
     }
 
     return (
-        (HaveRight(AddRoundRight)) ?
+        (!HaveRight(AddRoundRight)) ?
             <Redirect to="/errors/rights" />
             :
             (addSuccess) ?
@@ -98,52 +94,52 @@ const FormAddRound = (props) => {
                 <section className="col-12 round p-5">
 
                     <div class="row ">
-                        <form class="col-12 col-lg-6 offset-lg-3 bg-grey-light" onSubmit={handleSubmitAddRound}>
+                        <form className="col-12 col-lg-6 offset-lg-3 bg-grey-light" onSubmit={handleSubmitAddRound}>
 
                             <div className="form-group">
-                                <label for="InputDate" className="color-gold-light">Date</label>
+                                <label htmlfor="InputDate" className="color-gold-light">Date</label>
                                 <input type="date" className="form-control input-grey-light" id="InputDate" aria-describedby="dateHelp" placeholder="Enter date" onChange={changeDate} />
-                                <label for="InputHour" className="color-gold-light">Heure</label>
+                                <label htmlfor="InputHour" className="color-gold-light">Heure</label>
                                 <input type="time" className="form-control input-grey-light" id="InputHour" aria-describedby="HourHelp" placeholder="Enter Time" onChange={changeHour} />
 
                             </div>
 
                             <div className="form-group">
-                                <label for="InputName" className="color-gold-light">Nom de la partie</label>
+                                <label htmlfor="InputName" className="color-gold-light">Nom de la partie</label>
                                 <input type="text" className="form-control input-grey-light" id="InputName" aria-describedby="nameHelp" placeholder="Intitulé de la partie" onChange={changeName} value={name} />
 
 
                             </div>
                             <div className="form-group">
-                                <label for="InputPoint" className="color-gold-light">Nombre de points</label>
+                                <label htmlfor="InputPoint" className="color-gold-light">Nombre de points</label>
                                 <input type="number" className="form-control input-grey-light" id="InputPoint" aria-describedby="nameHelp" placeholder="Entrez le nombre de points attribués" onChange={changePointAttributs} value={points_attributs} />
                             </div>
                             <div className="form-group">
-                                <label for="InputPlayer" className="color-gold-light">Nombre de joueurs</label>
+                                <label htmlfor="InputPlayer" className="color-gold-light">Nombre de joueurs</label>
                                 <input type="number" className="form-control input-grey-light" id="InputPlayer" aria-describedby="nameHelp" placeholder="Entrez le nombre de joueurs maximum" onChange={changeMaxPlayer} value={maxPlayer} />
                             </div>
                             <div className="form-group">
-                                <label for="InputBuyIn" className="color-gold-light">Buy-in</label>
+                                <label htmlfor="InputBuyIn" className="color-gold-light">Buy-in</label>
                                 <input type="number" className="form-control input-grey-light" id="InputBuyIn" aria-describedby="nameHelp" placeholder="Montant de la partie" onChange={changeBuyIn} value={buyIn} />
                             </div>
                             <div className="form-group">
-                                <label for="InputRake" className="color-gold-light">Rake</label>
+                                <label htmlfor="InputRake" className="color-gold-light">Rake</label>
                                 <input type="number" className="form-control input-grey-light" id="InputRake" aria-describedby="nameHelp" placeholder="Montant du rake" onChange={changeRake} value={rake} />
                             </div>
                             <div className="form-group">
-                                <label for="InputStack" className="color-gold-light">Stack</label>
+                                <label htmlfor="InputStack" className="color-gold-light">Stack</label>
                                 <input type="number" className="form-control input-grey-light" id="InputStack" aria-describedby="nameHelp" placeholder="Saisissez le nombre de jetons par joueur" onChange={changeStack} value={stack} />
                             </div>
                             <div className="form-group">
-                                <label for="InputAddon" className="color-gold-light">Addon</label>
+                                <label htmlfor="InputAddon" className="color-gold-light">Addon</label>
                                 <input type="number" className="form-control input-grey-light" id="InputAddon" aria-describedby="nameHelp" placeholder="Saisissez le montant de l'addon ou rebuy" onChange={changeAddon} value={rebuy} />
                             </div>
                             <div className="form-group">
-                                <label for="InputRebuy" className="color-gold-light">Rebuy</label>
+                                <label htmlfor="InputRebuy" className="color-gold-light">Rebuy</label>
                                 <input type="number" className="form-control input-grey-light" id="InputAddon" aria-describedby="nameHelp" placeholder="Saisissez le montant du rebuy" onChange={changeRebuy} value={addon} />
                             </div>
                             <div className="form-group">
-                                <label for="InputBounty" className="color-gold-light">Bounty</label>
+                                <label htmlfor="InputBounty" className="color-gold-light">Bounty</label>
                                 <input type="number" className="form-control input-grey-light" id="InputBounty" aria-describedby="nameHelp" placeholder="Saisissez le montant du bounty" onChange={changeBounty} value={bounty} />
                             </div>
                             <div className="form-check">

@@ -1,39 +1,36 @@
 import { useParams } from 'react-router-dom'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useContext } from 'react';
+import RoundsContext from '../../Context/RoundsContext';
 import { HaveRight } from '../../Services/UserService';
 import { ManageRoundRight } from '../../Constantes/Right';
-import RoundsContext from '../../Context/RoundsContext';
-import { GetUsersRegisterRound } from "../../Services/PlayerRoundsService"
+import { GetUsersRegisterRound, UsersToBeOff, UsersToBeOn,UsersToBeEliminate } from "../../Services/PlayerRoundsService"
 import FormUpdateRound from "./FormUpdateRound";
 import { UpdateRound } from "../../Services/RoundsService";
-import {
-    UsersToBeOff,
-    UsersToBeOn
-} from "../../Services/PlayerRoundsService"
-// ligne d'un utilisateur inscrit au tournois.
-const UserRound = (props) => {
-    const { id_user, name_user, firstname_user, pseudo_user } = props.user;
-    const handleUsersToBeOn = () => {
-        UsersToBeOff(props.round.id_round ,id_user)
-    }
-    const handleUsersToBeOff = () => {
-        UsersToBeOff(props.round.id_round ,id_user)
-    }
-    const handleUsersToBeRefused = () => {
-        
-    }
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
+// ligne d'un utilisateur inscrit au tournois.
+
+const UserRegisterForRound = (props) => {
+    console.log(props)
     return (
         <tr>
-            <td>{name_user}</td>
-            <td>{firstname_user}</td>
-            <td>{pseudo_user}</td>
+            <td>{props.name_user}</td>
+            <td>{props.firstname_user}</td>
+            <td>{props.pseudo_user}</td>
             <td>
-                <button className='btn-gold-light' onClick={handleUsersToBeOn}>Présent</button>
-                <button className='btn-gold-light' onClick={handleUsersToBeOff}>Absent</button>
-                <button className='btn-gold-light'  onClick={handleUsersToBeRefused}>Refuser</button>
+                {(props.present)?
+                <FontAwesomeIcon icon={["fa", "thumbs-down"]} size="1x"></FontAwesomeIcon>
+                :
+                <FontAwesomeIcon icon={["fa", "thumbs-up"]} size="1x"></FontAwesomeIcon>
+                }
+            </td>
+            <td>
+                <button className='btn-gold-light' onClick={props.handleUsersToBeOn}>Présent</button>
+                <button className='btn-gold-light' onClick={props.handleUsersToBeOff}>Absent</button>
+                <button className='btn-gold-light' onClick={props.handleUsersEliminate}>Elimier</button>
             </td>
         </tr>
     )
@@ -42,13 +39,32 @@ const UserRound = (props) => {
 
 // boucle sur la liste des utilisateurs inscrit au tournois afin de les afficher individuelllement par ligne
 const UsersRegisterRound = (props) => {
+    console.log(props)
     const [players, setPlayers] = useState([]);
+    const handleUsersToBeOn = () => {
+        UsersToBeOn(props.round.id_round ,props.id_user)
+    }
+    const handleUsersToBeOff = useCallback(() => {
+        UsersToBeOff(props.round.id_round ,props.id_user)
+    },[])
+    const handleUsersEliminate= useCallback(() => {
+        UsersToBeEliminate(props.round.id_round ,props.id_user)
+    },[])
+
     useEffect(() => {
-        GetUsersRegisterRound(props.round.id_round, setPlayers)
-    }, [props.round.id_round, setPlayers]);
-    console.log(players)
+        console.log('useeffect isersregister')
+            GetUsersRegisterRound(props.round.id_round, setPlayers)
+    }, [props.round.id_round, setPlayers, handleUsersToBeOff]);
+
     // Boucle sur la liste des utilisateurs inscrit dans la manche
-    return players.map((user, key) => <UserRound {...props} {...user} key={key} />)
+    return players.map((user, key) =>
+        <UserRegisterForRound
+        {...props}
+        {...user}
+        key={key}
+        handleUsersEliminate={handleUsersEliminate}
+        handleUsersToBeOff={handleUsersToBeOff}
+        handleUsersToBeOn={handleUsersToBeOn} />)
 
 }
 
@@ -63,6 +79,7 @@ const UsersRegisterRoundContainer = (props) => {
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Pseudo</th>
+                    <th scope="col">Présence</th>
                     <th scope="col">actions</th>
                 </tr>
             </thead>
@@ -81,9 +98,8 @@ const RoundManagement = () => {
     const params = useParams();
 
     const { rounds } = useContext(RoundsContext);
-    const [round, setRound] = useState(rounds.find((element, index) => { console.log(element.id_round); return element.id_round == params.id }));
+    const [round, setRound] = useState(rounds.find((element, index) => element.id_round == params.id));
     const handleUpdateRounds = () => {
-        console.log("je suis dans click update")
         UpdateRound(round)
     }
 
@@ -92,7 +108,10 @@ const RoundManagement = () => {
             <section >
                 < div className="col-12 p-5 color-gold-light  bg-grey-dark m-2">
                     <div className="row">
-                        <div className='col-1 offset-11'>
+                        <div className='col-2 offset-10'>
+                                <Link to = "/Rounds" className='btn btn-grey-light'>
+                                    Return
+                              </Link>
                             <button onClick={handleUpdateRounds} className='btn btn-grey-light'>Save</button>
                         </div>
                     </div>

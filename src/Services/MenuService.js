@@ -1,10 +1,9 @@
 
-import { Menus } from "../Constantes/Menus"
+import { Menus, MenusMappedConst } from "../Constantes/Menus"
 // Fonction qui trie le menu en fonction de l'utilisateur
 // authentifié et de sa proprieté Order Ou OrderLoggedIn
-export const MenuSorted = (user) => {
+const MenuSorted = (user) => {
   var menu = [];
-  console.log(user)
 
   if (user?.loggedIn) {
     menu = Menus.sort(
@@ -33,4 +32,18 @@ export const MenuSorted = (user) => {
       });
   }
   return menu;
+}
+
+const MenusMapped = (url, name) => {
+  let mapped = false;
+  MenusMappedConst.forEach((menu, index) => {
+    if (menu.path === url && name === menu.menusMapped) {
+      mapped = true;
+    }
+  })
+  return mapped;
+}
+export {
+  MenuSorted,
+  MenusMapped
 }
